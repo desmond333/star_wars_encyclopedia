@@ -1,8 +1,6 @@
 import Head from 'next/head';
 
-import { Header } from './components/Header/Header';
-import { Main } from './components/Main/Main';
-import { Footer } from './components/Footer/Footer';
+import { Modal } from './components/Main/Modal/Modal';
 
 import styles from './Index.module.scss';
 
@@ -14,11 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
-
-      <Main />
-
-      <Footer />
+      <Modal/>
     </div>
   );
 }
