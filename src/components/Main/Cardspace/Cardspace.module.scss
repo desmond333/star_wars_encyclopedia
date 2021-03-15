@@ -1,0 +1,15 @@
+@import '/styles/common_styles/vars.scss';
+
+.cards {
+  width: 100%;
+  .cards__container {
+    max-width: 1250px;
+    margin: 0 auto;
+  }
+  .cards__list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0;
+  }
+}

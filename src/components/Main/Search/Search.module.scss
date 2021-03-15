@@ -1,4 +1,4 @@
-@import '../../../common_styles/vars.scss';
+@import '/styles/common_styles/vars.scss';
 
 .search {
   .form {
@@ -68,7 +68,7 @@
     position: absolute;
     right: 7px;
     bottom: 12px;
-    background-image: url(../../../images/search.svg);
+    background-image: url('../../../../public/images/search.svg');
     width: 25px;
     height: 25px;
     background-color: transparent;

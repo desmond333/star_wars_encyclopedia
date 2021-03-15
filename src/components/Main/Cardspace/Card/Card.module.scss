@@ -1,4 +1,4 @@
-@import '../../../common_styles/vars.scss';
+@import '/styles/common_styles/vars.scss';
 
 .card {
   display: flex;
@@ -31,7 +31,6 @@
     line-height: 56px;
     width: 80px;
     height: 80px;
-    background: #a3015f;
     border-radius: 50%;
   }
   .card__heroName {
