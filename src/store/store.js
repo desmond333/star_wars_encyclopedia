@@ -1,5 +1,10 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+import cardsReducer from './reducers/cardsDataReducer'
 
-const store = createStore(reducer);
+let reducers = combineReducers({ //смешиваем все reducer с помощью f combineReducers
+  cardsData: cardsReducer,
+})
+
+let store = createStore(reducers);
 
 export default store;

@@ -20,6 +20,11 @@ export default function Modal(props) {
     return filmsElements;
   };
 
+  //с помощью хука useEffect выполняем функцию во время первой отрисовки
+  useEffect(() => {
+    setRandBackgColor();
+  }, []);
+
   //с помощью хука useRef создаем ссылку на div modal__headerAvatar
   const avatarRef = useRef();
 
@@ -28,20 +33,24 @@ export default function Modal(props) {
     avatarRef.current.style.backgroundColor = props.finalСolorValue;
   };
 
-  //с помощью хука useEffect выполняем функцию во время первой отрисовки
-  useEffect(() => {
-    setRandBackgColor();
-  }, []);
+  //убираем классы у appBody и body при закрытии карточки
+  const onModalClose = () => {
+    props.appBodyRef.current.classList.remove('blur');
+    document.querySelector('body').classList.remove('noScroll');
+    props.setOpen(false);
+  }
+
   return ReactDOM.createPortal(
     <div className={styles.modal}>
       <div className={styles.modal__card}>
-        <div className={styles.modal__close} onClick={props.onClose}></div>
+        <div className={styles.modal__close} onClick={onModalClose}></div>
         <div className={styles.modal__inner}>
           <div className={styles.modal__header}>
             <div className={styles.modal__headerAvatar} ref={avatarRef}>
-              {props.nameFirstLetter}
+              {props.creature.name[0]}
             </div>
-            <div className={styles.modal__headerName}>{props.message}</div>
+            <div className={styles.modal__headerName}>{props.creature.name}</div>
+            <div className={styles.modal__headerBackground}></div>
           </div>
           <div className={styles.modal__middle}>
             <span className={styles.modal__middleBorder}></span>
@@ -51,7 +60,7 @@ export default function Modal(props) {
               <div className={styles.footer__item}>
                 <div className={styles.leftside__itemIconYear}></div>
                 <div className={styles.leftside__itemText}>Birth Year</div>
-                <div className={styles.leftside__itemValue}>1999</div>
+                <div className={styles.leftside__itemValue}>{props.creature.birth_year}</div>
               </div>
               <div className={styles.footer__item}>
                 <div className={styles.leftside__itemIconSpecies}></div>
@@ -61,7 +70,7 @@ export default function Modal(props) {
               <div className={styles.footer__item}>
                 <div className={styles.leftside__itemIconGender}></div>
                 <div className={styles.leftside__itemText}>Gender</div>
-                <div className={styles.leftside__itemValue}>Male</div>
+                <div className={styles.leftside__itemValue}>{props.creature.gender}</div>
               </div>
             </div>
             <div className={styles.footer__rightside}>

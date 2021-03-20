@@ -15,6 +15,8 @@
 .modal__card {
   position: relative;
   background-color: $secondary;
+  background: url('../../../../public/images/cardBackground.jpg') center;
+  background-size: cover;
   width: 800px;
   height: 492px;
   padding: 80px;
@@ -34,7 +36,7 @@
   width: 21px;
   height: 21px;
   opacity: 0.2;
-  transition: transform 0.2s linear, opacity 0.2s linear, scale 0.2s linear;
+  transition: transform 0.3s linear, opacity 0.3s linear, scale 0.3s linear;
   &:hover {
     opacity: 1;
     transform: rotate(-90deg);
@@ -44,11 +46,11 @@
 
 .modal__inner {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1.5fr 0.5fr 1fr;
   height: 100%;
   .modal__header {
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1fr 2fr 3fr;
   }
   .modal__headerAvatar {
     display: flex;
@@ -65,16 +67,22 @@
     padding-top: 30px;
     text-align: left;
     line-height: 21px;
-    font-size: 18px;
+    font-size: 24px;
+  }
+  .modal__headerBackground {
+    background: url('../../../../public/images/modalHeaderRight.png') no-repeat;
+    background-position: top right;
+    background-size: 150px;
+    height: 100%;
   }
   .modal__middle {
     display: flex;
-    align-items: center;
+    align-items: top;
     width: 100%;
     height: 100%;
   }
   .modal__middleBorder {
-    background-color: $gray;
+    background-color: $white;
     width: 100%;
     height: 2px;
   }
@@ -90,6 +98,21 @@
     display: grid;
     grid-template-columns: 0.7fr 2.7fr 4fr;
     align-items: center;
+    &:nth-child(1) {
+      & > div:nth-child(1) {
+        background: url('../../../../public/images/calendar.svg') no-repeat;
+      }
+    }
+    &:nth-child(2) {
+      & > div:nth-child(1) {
+        background: url('../../../../public/images/species.svg') no-repeat;
+      }
+    }
+    &:nth-child(3) {
+      & > div:nth-child(1) {
+        background: url('../../../../public/images/gender.svg') no-repeat;
+      }
+    }
     & > div {
       font-size: 18px;
     }
@@ -111,7 +134,10 @@
     grid-template-rows: 1fr 2fr;
     .footer__item:nth-child(2) {
       padding-top: 9px;
-      align-items:initial;
+      align-items: initial;
+      & > div:nth-child(1) {
+        background: url('../../../../public/images/films.svg') no-repeat;
+      }
     }
   }
 
@@ -125,5 +151,168 @@
     font-size: 18px;
     line-height: 21px;
     margin-left: 24px;
+  }
+}
+
+//animations
+.modal__headerBackground {
+  animation: flyShip 10s;
+  animation-iteration-count: infinite;
+  animation-delay: 1s;
+
+  -webkit-animation: flyShip linear 10s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-delay: 1s;
+
+  -moz-animation: flyShip linear 10s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-delay: 1s;
+
+  -o-animation: flyShip linear 10s;
+  -o-animation-iteration-count: infinite;
+  -o-animation-delay: 1s;
+
+  -ms-animation: flyShip linear 10s;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-delay: 1s;
+}
+
+@keyframes flyShip {
+  0% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
+  }
+  25% {
+    background-position: 45% 35%;
+    background-size: 165px;
+    animation-timing-function: linear;
+  }
+  50% {
+    background-position: 10% 90%;
+    background-size: 210px;
+    animation-timing-function: linear;
+  }
+  75% {
+    background-size: 195px;
+    background-position: 60% 55%;
+    animation-timing-function: linear;
+  }
+  100% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
+  }
+}
+
+@-moz-keyframes flyShip {
+  0% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
+  }
+  25% {
+    background-position: 45% 35%;
+    background-size: 165px;
+    animation-timing-function: linear;
+  }
+  50% {
+    background-position: 10% 90%;
+    background-size: 210px;
+    animation-timing-function: linear;
+  }
+  75% {
+    background-size: 195px;
+    background-position: 60% 55%;
+    animation-timing-function: linear;
+  }
+  100% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
+  }
+}
+
+@-webkit-keyframes flyShip {
+  0% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
+  }
+  25% {
+    background-position: 45% 35%;
+    background-size: 165px;
+    animation-timing-function: linear;
+  }
+  50% {
+    background-position: 10% 90%;
+    background-size: 210px;
+    animation-timing-function: linear;
+  }
+  75% {
+    background-size: 195px;
+    background-position: 60% 55%;
+    animation-timing-function: linear;
+  }
+  100% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
+  }
+}
+
+@-o-keyframes flyShip {
+  0% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
+  }
+  25% {
+    background-position: 45% 35%;
+    background-size: 165px;
+    animation-timing-function: linear;
+  }
+  50% {
+    background-position: 10% 90%;
+    background-size: 210px;
+    animation-timing-function: linear;
+  }
+  75% {
+    background-size: 195px;
+    background-position: 60% 55%;
+    animation-timing-function: linear;
+  }
+  100% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
+  }
+}
+
+@-ms-keyframes flyShip {
+  0% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
+  }
+  25% {
+    background-position: 45% 35%;
+    background-size: 165px;
+    animation-timing-function: linear;
+  }
+  50% {
+    background-position: 10% 90%;
+    background-size: 210px;
+    animation-timing-function: linear;
+  }
+  75% {
+    background-size: 195px;
+    background-position: 60% 55%;
+    animation-timing-function: linear;
+  }
+  100% {
+    background-position: top right;
+    background-size: 150px;
+    animation-timing-function: linear;
   }
 }
