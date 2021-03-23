@@ -17,7 +17,7 @@ $font-size_modalcard: 24px;
 .modal__card {
   position: relative;
   background-color: $secondary;
-  background: url('../../../../public/images/cardBackground.jpg') center;
+  background: url('../../../public/assets/images/cardBackground.jpg') center;
   background-size: cover;
   width: 33.3em;
   height: 20.5em;
@@ -31,7 +31,7 @@ $font-size_modalcard: 24px;
 }
 
 .modal__close {
-  background: url('../../../../public/images/close.svg');
+  background: url('../../../public/assets/images/icons/close.svg');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -75,7 +75,7 @@ $font-size_modalcard: 24px;
   height: 1.66em * 2;
 }
 .modal__headerBackground {
-  background: url('../../../../public/images/modalHeaderRight.png') no-repeat;
+  background: url('../../../public/assets/images/modalHeaderRight.png') no-repeat;
   background-position: top right;
   background-size: 6.25em;
   height: 100%;
@@ -106,7 +106,7 @@ $font-size_modalcard: 24px;
   font-size: 18px;
   &:nth-child(1) {
     & > div:nth-child(1) {
-      background: url('../../../../public/images/calendar.svg');
+      background: url('../../../public/assets/images/icons/calendar.svg');
       background-position: center;
       height: 100%;
       width: 1.11em;
@@ -116,7 +116,7 @@ $font-size_modalcard: 24px;
   }
   &:nth-child(2) {
     & > div:nth-child(1) {
-      background: url('../../../../public/images/species.svg');
+      background: url('../../../public/assets/images/icons/species.svg');
       background-position: center;
       height: 100%;
       width: 1.11em;
@@ -126,7 +126,7 @@ $font-size_modalcard: 24px;
   }
   &:nth-child(3) {
     & > div:nth-child(1) {
-      background: url('../../../../public/images/gender.svg');
+      background: url('../../../public/assets/images/icons/gender.svg');
       background-position: center;
       height: 100%;
       width: 1.11em;
@@ -135,7 +135,7 @@ $font-size_modalcard: 24px;
     }
   }
   & > div:nth-child(1) {
-    background: url('../../../../public/images/homeworld.svg');
+    background: url('../../../public/assets/images/icons/homeworld.svg');
     background-position: center;
     height: 100%;
     width: 1.11em;
@@ -157,7 +157,7 @@ $font-size_modalcard: 24px;
     padding-top: 0.4em;
     align-items: initial;
     & > div:nth-child(1) {
-      background: url('../../../../public/images/films.svg');
+      background: url('../../../public/assets/images/icons/films.svg');
       background-position: top;
       height: 100%;
       width: 1.11em;

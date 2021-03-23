@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import styles from './Card.module.scss';
 
-import Modal from '../Modal';
+import ModalArea from '../../../ModalArea/ModalArea';
 
 export default function Card(props) {
   //с помощью хука useState создаем локальный стейт для открытия модального окна
@@ -54,7 +54,7 @@ export default function Card(props) {
           <p className={styles.card__heroGender}>{props.creature.gender}</p>
         </div>
       </li>
-      <Modal
+      <ModalArea
         isOpen={open}
         setOpen={setOpen}
         finalСolorValue={finalСolorValue}

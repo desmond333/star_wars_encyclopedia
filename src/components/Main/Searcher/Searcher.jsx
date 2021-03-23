@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { onSearchCreator } from '../../../store/actions/onSearchCreator';
+import { onSearchQueryAC } from '../../../store/actions/onSearchQueryAC';
 
-import styles from './Search.module.scss';
+import styles from './Searcher.module.scss';
 
-export default function Search() {
+export default function Searcher() {
   const dispatch = useDispatch();
   const onChangeInput = (e) => {
     const { value } = e.target; //деструктуризация
@@ -16,7 +16,7 @@ export default function Search() {
 
   const onSearch = (value) => {
     if (value != null) {
-      dispatch(onSearchCreator(value));
+      dispatch(onSearchQueryAC(value));
     }
   };
 

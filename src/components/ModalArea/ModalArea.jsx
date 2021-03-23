@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom';
 import React, { useState, useRef, useEffect } from 'react';
 
-import styles from './Modal.module.scss';
+import styles from './ModalArea.module.scss';
 
-export default function Modal(props) {
+export default function ModalArea(props) {
   //модальное окно откроется только если isOpen будет true
   if (!props.isOpen) return null;
 
@@ -34,7 +34,7 @@ export default function Modal(props) {
   };
 
   //убираем классы у appBody и body при закрытии карточки
-  const onModalClose = () => {
+  const onModalAreaClose = () => {
     props.appBodyRef.current.classList.remove('blur');
     document.querySelector('body').classList.remove('noScroll');
     props.setOpen(false);
@@ -43,7 +43,7 @@ export default function Modal(props) {
   return ReactDOM.createPortal(
     <div className={styles.modal}>
       <div className={styles.modal__card}>
-        <div className={styles.modal__close} onClick={onModalClose}></div>
+        <div className={styles.modal__close} onClick={onModalAreaClose}></div>
         <div className={styles.modal__inner}>
           <div className={styles.modal__header}>
             <div className={styles.modal__headerAvatar} ref={avatarRef}>

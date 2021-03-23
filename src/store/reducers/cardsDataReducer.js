@@ -1,7 +1,8 @@
-let DATA_HAS_BEEN_UPLOADED = 'DATA_HAS_BEEN_UPLOADED'; //используем константы, чтобы не опечататься в строках
-let ON_SEARCH = 'ON_SEARCH';
+const DATA_HAS_BEEN_UPLOADED = 'DATA_HAS_BEEN_UPLOADED'; //используем константы, чтобы не опечататься в строках
+const ON_SEARCH_QUERY = 'ON_SEARCH_QUERY';
 
-let initialState = {
+
+const initialState = {
   //если подчасть state не приходит в reducer, то используем эту подчасть state по умолчанию
   results: [
     {
@@ -461,7 +462,7 @@ const cardsReducer = (state = initialState, action) => {
         //создаем объект и сразу возвращаем
         results: [...action.data.results],
       };
-    case ON_SEARCH:
+    case ON_SEARCH_QUERY:
       let foundCreatures = [];
       for (let index = 0; index < state.results.length; index++) {
         if (action.searchQuery == state.results[index].name) {

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-import AppBody from '../src/components/AppBody';
+import AppWrapper from '../src/components/AppWrapper/AppWrapper';
 
 import { store } from '../src/store/store';
 import { Provider } from 'react-redux';
@@ -13,7 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Provider store={store}>
-        <AppBody />
+        <AppWrapper />
       </Provider>
     </div>
   );
