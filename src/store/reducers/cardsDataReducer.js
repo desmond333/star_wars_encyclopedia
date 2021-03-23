@@ -1,7 +1,5 @@
-import {dataHasBeenUploadedCreator} from '../actions/dataHasBeenUploaded'
-
 let DATA_HAS_BEEN_UPLOADED = 'DATA_HAS_BEEN_UPLOADED'; //используем константы, чтобы не опечататься в строках
-let CONST_2 = 'CONST_2';
+let ON_SEARCH = 'ON_SEARCH';
 
 let initialState = {
   //если подчасть state не приходит в reducer, то используем эту подчасть state по умолчанию
@@ -459,33 +457,24 @@ let initialState = {
 const cardsReducer = (state = initialState, action) => {
   switch (action.type) {
     case DATA_HAS_BEEN_UPLOADED:
-      debugger
-      return {...action.data};
+      return {
+        //создаем объект и сразу возвращаем
+        results: [...action.data.results],
+      };
+    case ON_SEARCH:
+      let foundCreatures = [];
+      for (let index = 0; index < state.results.length; index++) {
+        if (action.searchQuery == state.results[index].name) {
+          foundCreatures[index] += state.results[index];
+        }
+      }
+      //почему цикл срабатывает только один раз?
+      return {
+        results: [...foundCreatures],
+      };
     default:
       return state;
   }
-  if (action.type === DATA_HAS_BEEN_UPLOADED) {
-    //реагируем на приходящие action
-    let newMessage = state.newMessageText; //добавляем в textarea уже написанный текст, локально находящийся здесь
-
-    return {
-      //создаём и сразу возвращаем
-      ...state,
-      newMessageText: '', //сбрасываем текст, изменив в state значение на empty string
-      messagesData: [...state.messagesData, { id: 7, message: newMessage } /*вместо push*/], //добавляем новый подОбъект в state через onClick
-    }; //сделали глубокую копию state, так как собираемся менять массив
-
-    /*stateCopy.messagesData.push( { id: 7, /!*id: this._state.dialogPage.messages[this._state.dialogPage.messages.length - 1].id + 1,*!/
-            message: newMessage} )//добавляем наш новый подОбъект в state используя onClick в button*/
-  } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-    //реагируем на приходящие action
-    return {
-      //создаём и сразу возвращаем
-      ...state,
-      newMessageText: action.messageText, //приравниваем наш state к параметру из f onPostChange используя onChange в textarea
-    }; //сделали поверхностную копию state, перезаписав один примитив на этапе создания stateCopy
-  }
 };
-
 
 export default cardsReducer;

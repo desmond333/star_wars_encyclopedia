@@ -10,7 +10,7 @@ export default function Cardspace(props) {
     let rand = min - 0.5 + Math.random() * (max - min + 1);
     return Math.round(rand);
   };
-  const cardsQuantity = getRandomInteger(1, 20);
+  const cardsQuantity = getRandomInteger(1, 10);
   let cards = creatures
     .filter((elem, index) => index < cardsQuantity)
     .map((creature, index) => (

@@ -38,7 +38,7 @@ export default function Modal(props) {
     props.appBodyRef.current.classList.remove('blur');
     document.querySelector('body').classList.remove('noScroll');
     props.setOpen(false);
-  }
+  };
 
   return ReactDOM.createPortal(
     <div className={styles.modal}>
@@ -65,7 +65,7 @@ export default function Modal(props) {
               <div className={styles.footer__item}>
                 <div className={styles.leftside__itemIconSpecies}></div>
                 <div className={styles.leftside__itemText}>Species</div>
-                <div className={styles.leftside__itemValue}>People</div>
+                <div className={styles.leftside__itemValue}>{props.creature.species}</div>
               </div>
               <div className={styles.footer__item}>
                 <div className={styles.leftside__itemIconGender}></div>

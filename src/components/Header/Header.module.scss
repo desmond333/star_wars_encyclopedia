@@ -1,4 +1,4 @@
-@import '/styles/common_styles/vars.scss';
+@import '/styles/common_styles/common_vars.scss';
 
 .header {
   height: 40vh;
@@ -37,7 +37,6 @@
     }
   }
 }
-
 
 @media screen and (orientation: portrait) and (max-width: 1000px) {
   .header {

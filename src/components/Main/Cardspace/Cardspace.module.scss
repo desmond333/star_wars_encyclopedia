@@ -1,4 +1,4 @@
-@import '/styles/common_styles/vars.scss';
+@import '/styles/common_styles/common_vars.scss';
 
 .cards {
   width: 100%;
@@ -6,7 +6,7 @@
     max-width: 1250px;
     margin: 0 auto;
   }
-  .cards__quantity{
+  .cards__quantity {
     margin: 20px 0;
     text-align: center;
     color: $white;

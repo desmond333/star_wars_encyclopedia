@@ -1,4 +1,4 @@
-@import '/styles/common_styles/vars.scss';
+@import '/styles/common_styles/common_vars.scss';
 
 .card {
   display: flex;
@@ -22,7 +22,8 @@
   &:hover {
     box-shadow: 0px 5px 40px $white;
     cursor: pointer;
-    background: url('../../../../../public/images/cardBackgroundHover.gif') center, rgba(0, 0, 0, 0.8);
+    background: url('../../../../../public/images/cardBackgroundHover.gif') center,
+      rgba(0, 0, 0, 0.8);
     background-size: cover;
     background-blend-mode: color;
   }
@@ -119,4 +120,9 @@
     opacity: 1;
     margin-top: 20px;
   }
+}
+
+/* Extra Small Devices, Phones */
+@media screen and (orientation: portrait) and (max-width: 480px) {
+  
 }
