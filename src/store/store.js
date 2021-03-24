@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger'
-import thunk from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 
 import cardsDataReducer from './reducers/cardsDataReducer'
 
@@ -8,4 +8,4 @@ const rootReducer = combineReducers({ //смешиваем все reducer с п�
   cardsData: cardsDataReducer,
 })
 
-export const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
