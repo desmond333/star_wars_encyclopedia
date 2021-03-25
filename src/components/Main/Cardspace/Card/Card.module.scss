@@ -122,7 +122,23 @@
   }
 }
 
+// @mixin decrease($decrease_constant) {
+//   .modal__card {
+//     font-size: $font-size_modalcard * $decrease_constant;
+//   }
+//   .modal__headerAvatar {
+//     font-size: $font-size_modalcard * 2 * $decrease_constant;
+//   }
+//   .footer__item {
+//     font-size: 18px * $decrease_constant;
+//   }
+// }
+
+/* Small Devices, Tablets */
+@media only screen and (orientation: portrait) and (max-width: 768px) {
+  // @include decrease(1);
+}
+
 /* Extra Small Devices, Phones */
 @media screen and (orientation: portrait) and (max-width: 480px) {
-  
 }

@@ -12,7 +12,7 @@ export default function ModalArea(props) {
     let filmsElements = 'No films';
     if (props.filmsList.length > 0) {
       filmsElements = props.filmsList.map((name, index) => (
-        <div className={styles.rightside__itemValueFilm} key={`${name}_${index}`}>
+        <div className={styles.footer__itemValueFilm} key={`${name}_${index}`}>
           {name}
         </div>
       ));
@@ -56,34 +56,30 @@ export default function ModalArea(props) {
             <span className={styles.modal__middleBorder}></span>
           </div>
           <div className={styles.modal__footer}>
-            <div className={styles.footer__leftside}>
-              <div className={styles.footer__item}>
-                <div className={styles.leftside__itemIconYear}></div>
-                <div className={styles.leftside__itemText}>Birth Year</div>
-                <div className={styles.leftside__itemValue}>{props.creature.birth_year}</div>
-              </div>
-              <div className={styles.footer__item}>
-                <div className={styles.leftside__itemIconSpecies}></div>
-                <div className={styles.leftside__itemText}>Species</div>
-                <div className={styles.leftside__itemValue}>{props.creature.species}</div>
-              </div>
-              <div className={styles.footer__item}>
-                <div className={styles.leftside__itemIconGender}></div>
-                <div className={styles.leftside__itemText}>Gender</div>
-                <div className={styles.leftside__itemValue}>{props.creature.gender}</div>
-              </div>
+            <div className={styles.footer__item}>
+              <div className={styles.footer__itemIcon}></div>
+              <div className={styles.footer__itemText}>Birth Year</div>
+              <div className={styles.footer__itemValue}>{props.creature.birth_year}</div>
             </div>
-            <div className={styles.footer__rightside}>
-              <div className={styles.footer__item}>
-                <div className={styles.rightside__itemIconHomeworld}></div>
-                <div className={styles.rightside__itemText}>Homeworld</div>
-                <div className={styles.rightside__itemValue}>Earth</div>
-              </div>
-              <div className={styles.footer__item}>
-                <div className={styles.rightside__itemIconFilms}></div>
-                <div className={styles.rightside__itemText}>Films</div>
-                <div className={styles.rightside__itemValue}>{filmsElementsRender()}</div>
-              </div>
+            <div className={styles.footer__item}>
+              <div className={styles.footer__itemIcon}></div>
+              <div className={styles.footer__itemText}>Species</div>
+              <div className={styles.footer__itemValue}>{props.creature.species}</div>
+            </div>
+            <div className={styles.footer__item}>
+              <div className={styles.footer__itemIcon}></div>
+              <div className={styles.footer__itemText}>Gender</div>
+              <div className={styles.footer__itemValue}>{props.creature.gender}</div>
+            </div>
+            <div className={styles.footer__item}>
+              <div className={styles.footer__itemIcon}></div>
+              <div className={styles.footer__itemText}>Homeworld</div>
+              <div className={styles.footer__itemValue}>Earth</div>
+            </div>
+            <div className={styles.footer__item}>
+              <div className={styles.footer__itemIcon}></div>
+              <div className={styles.footer__itemText}>Films</div>
+              <div className={styles.footer__itemValue}>{filmsElementsRender()}</div>
             </div>
           </div>
         </div>

@@ -19,7 +19,6 @@ export default function Cardspace(props) {
   return (
     <div className={styles.cards}>
       <div className={styles.cards__container}>
-        <div className={styles.cards__quantity}>Количество карточек, загруженных с сервера в этот раз = {cardsQuantity} шт</div>
         <ul className={styles.cards__list}>{cards}</ul>
       </div>
     </div>

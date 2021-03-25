@@ -51,7 +51,6 @@ const cardsReducer = (state = initialState, action) => {
         results: [...foundCreatures],
       };
     case TOGGLE_IS_FETCHING:
-      debugger
       return { ...state, isFetching: action.isFetching };
     default:
       return state;
