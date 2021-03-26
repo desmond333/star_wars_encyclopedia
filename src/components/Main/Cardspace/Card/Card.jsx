@@ -47,18 +47,18 @@ export default function Card(props) {
         <div className={styles.card__hero}>
           <div className={styles.card__heroAvatar}>
             <div className={styles.card__heroIcon} ref={cardIconRef}>
-              {props.creature.name[0]}
+              {props.man.name[0]}
             </div>
           </div>
-          <p className={styles.card__heroName} ref={heroNameRef}>{props.creature.name}</p>
-          <p className={styles.card__heroGender}>{props.creature.gender}</p>
+          <p className={styles.card__heroName} ref={heroNameRef}>{props.man.name}</p>
+          <p className={styles.card__heroGender}>{props.man.gender}</p>
         </div>
       </li>
       <ModalArea
         isOpen={open}
         setOpen={setOpen}
         finalСolorValue={finalСolorValue}
-        creature={props.creature}
+        man={props.man}
         appBodyRef={props.appBodyRef}
         filmsList={['Never give up', 'Van Helsing', 'Flipped']}
       />

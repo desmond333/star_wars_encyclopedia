@@ -9,7 +9,7 @@ export default function Main(props) {
   return (
     <main className={styles.main}>
       <Searcher state={props.state}/>
-      <Cardspace state={props.state} appBodyRef={props.appBodyRef}/>
+      <Cardspace stateData={props.stateData} appBodyRef={props.appBodyRef}/>
     </main>
   );
 }

@@ -1,25 +1,32 @@
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 import styles from './Cardspace.module.scss';
 
 import Card from './Card/Card';
+import { secondDataHasBeenUploadedThunkCreator } from '../../../store/thunk_creators/dataHasBeenUploadedThunkCreator';
 
 export default function Cardspace(props) {
-  let creatures = props.state.results;
+  const stateData = props.stateData;
 
-  const getRandomInteger = (min, max) => {
-    // получить случайное число от (min-0.5) до (max+0.5)
-    let rand = min - 0.5 + Math.random() * (max - min + 1);
-    return Math.round(rand);
-  };
-  const cardsQuantity = getRandomInteger(1, 10);
-  let cards = creatures
-    .filter((elem, index) => index < cardsQuantity)
-    .map((creature, index) => (
-      <Card key={`${creature}_${index}`} creature={creature} appBodyRef={props.appBodyRef} />
-    ));
   return (
     <div className={styles.cards}>
       <div className={styles.cards__container}>
-        <ul className={styles.cards__list}>{cards}</ul>
+        <ul className={styles.cards__list}>
+          <InfiniteScroll
+            dataLength={stateData.count} //This is important field to render the next data
+            next={secondDataHasBeenUploadedThunkCreator()}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+            endMessage={
+              <p style={{ textAlign: 'center' }}>
+                <b>Yay! You have seen it all</b>
+              </p>
+            }>
+            {stateData.results.map((man, index) => (
+              <Card key={`${man}_${index}`} man={man} appBodyRef={props.appBodyRef} />
+            ))}
+          </InfiniteScroll>
+        </ul>
       </div>
     </div>
   );

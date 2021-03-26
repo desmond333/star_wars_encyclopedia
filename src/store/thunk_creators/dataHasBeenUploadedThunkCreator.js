@@ -1,15 +1,25 @@
-import { dataHasBeenUploadedAsyncAC } from '../action_creators/dataHasBeenUploadedAsyncAC';
+import { firstMainDataFromAPIAsyncAC } from '../action_creators/firstMainDataFromAPIAsyncAC';
+import { secondMainDataFromAPIAsyncAC } from '../action_creators/secondMainDataFromAPIAsyncAC';
 import { toggleIsFetchingAC } from '../action_creators/toggleIsFetchingAC';
 
-import { getCreaturesFromApi } from '../../../pages/api/swapi';
+import {
+  firstPagePeopleRequestFromApi,
+  secondPagePeopleRequestFromApi,
+} from '../../../pages/api/swapi';
 
 export const dataHasBeenUploadedThunkCreator = (props) => {
   //возращаем функцию
   return (dispatch) => {
-    dispatch(toggleIsFetchingAC(true));
+    firstPagePeopleRequestFromApi().then((data) => dispatch(firstMainDataFromAPIAsyncAC(data)));
+  };
+};
 
-    getCreaturesFromApi().then((data) => dispatch(dataHasBeenUploadedAsyncAC(data)));
-
-    dispatch(toggleIsFetchingAC(false));
+export const secondDataHasBeenUploadedThunkCreator = (props) => {
+  //возращаем функцию
+  return (dispatch) => {
+    secondPagePeopleRequestFromApi().then((data) => {
+      debugger
+      dispatch(secondMainDataFromAPIAsyncAC(data));
+    });
   };
 };
