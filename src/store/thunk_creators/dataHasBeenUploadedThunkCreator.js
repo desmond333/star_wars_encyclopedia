@@ -1,25 +1,19 @@
-import { firstMainDataFromAPIAsyncAC } from '../action_creators/firstMainDataFromAPIAsyncAC';
-import { secondMainDataFromAPIAsyncAC } from '../action_creators/secondMainDataFromAPIAsyncAC';
-import { toggleIsFetchingAC } from '../action_creators/toggleIsFetchingAC';
+import { addPeopleFromAPIAsyncAC } from '../action_creators/addPeopleFromAPIAsyncAC';
 
-import {
-  firstPagePeopleRequestFromApi,
-  secondPagePeopleRequestFromApi,
-} from '../../../pages/api/swapi';
+import { peoplePageRequestAPI } from '../../../pages/api/swapi';
 
-export const dataHasBeenUploadedThunkCreator = (props) => {
+export const dataHasBeenUploadedThunkCreator = (url) => {
   //возращаем функцию
   return (dispatch) => {
-    firstPagePeopleRequestFromApi().then((data) => dispatch(firstMainDataFromAPIAsyncAC(data)));
-  };
-};
+    peoplePageRequestAPI(url).then((data) => {
+      // const firstPageUrl = "http://swapi.dev/api/people/?page=1";
+      // if (data.next === firstPageUrl) {
+      //   dispatch(firstMainDataFromAPIAsyncAC(data));
+      // } else {
+      //   dispatch(secondMainDataFromAPIAsyncAC(data));
+      // }
 
-export const secondDataHasBeenUploadedThunkCreator = (props) => {
-  //возращаем функцию
-  return (dispatch) => {
-    secondPagePeopleRequestFromApi().then((data) => {
-      debugger
-      dispatch(secondMainDataFromAPIAsyncAC(data));
+      dispatch(addPeopleFromAPIAsyncAC(data));
     });
   };
 };

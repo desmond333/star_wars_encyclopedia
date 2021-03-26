@@ -7,9 +7,11 @@
     margin: 0 auto;
   }
   .cards__list {
+    padding: 0;
+  }
+  .cards__infiniteScroll {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    padding: 0;
   }
 }

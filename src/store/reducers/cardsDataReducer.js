@@ -1,23 +1,23 @@
-const FIRST_MAIN_DATA_FROM_API = 'FIRST_MAIN_DATA_FROM_API'; //используем константы, чтобы не опечататься в строках
+const REPLACE_STATE_FROM_API = 'REPLACE_STATE_FROM_API'; //используем константы, чтобы не опечататься в строках
 const ON_SEARCH_QUERY = 'ON_SEARCH_QUERY';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const SECOND_MAIN_DATA_FROM_API = 'SECOND_MAIN_DATA_FROM_API';
+const ADD_PEOPLE_FROM_API = 'ADD_PEOPLE_FROM_API';
 
 const initialState = {
   //если подчасть state не приходит в reducer, то используем эту подчасть state по умолчанию
   data: {
     count: null,
-    next: null,
+    next: 'people/?page=1',
     previous: null,
     results: [
       {
         name: 'INITIAL STATE',
-        height: '172',
-        mass: '77',
+        height: '0',
+        mass: '0',
         hair_color: 'blond',
         skin_color: 'fair',
         eye_color: 'blue',
-        birth_year: '19BBY',
+        birth_year: '000000',
         gender: 'INITIAL STATE',
         homeworld: 'http://swapi.dev/api/planets/1/',
         films: [
@@ -26,7 +26,7 @@ const initialState = {
           'http://swapi.dev/api/films/3/',
           'http://swapi.dev/api/films/6/',
         ],
-        species: [],
+        species: ['someone'],
         vehicles: ['http://swapi.dev/api/vehicles/14/', 'http://swapi.dev/api/vehicles/30/'],
         starships: ['http://swapi.dev/api/starships/12/', 'http://swapi.dev/api/starships/22/'],
         created: '2014-12-09T13:50:51.644000Z',
@@ -40,13 +40,13 @@ const initialState = {
 
 const cardsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FIRST_MAIN_DATA_FROM_API:
+    case REPLACE_STATE_FROM_API:
       return {
         //создаем объект и сразу возвращаем
         ...state,
         data: { ...action.data },
       };
-    case SECOND_MAIN_DATA_FROM_API:
+    case ADD_PEOPLE_FROM_API:
       return {
         ...state,
         data: {
