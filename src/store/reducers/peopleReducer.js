@@ -1,7 +1,7 @@
-const REPLACE_STATE_FROM_API = 'REPLACE_STATE_FROM_API'; //используем константы, чтобы не опечататься в строках
+const REPLACE_STATE_PEOPLE_DATA_BY_PEOPLE_DATA_API = 'REPLACE_STATE_PEOPLE_DATA_BY_PEOPLE_DATA_API'; //используем константы, чтобы не опечататься в строках
 const ON_SEARCH_QUERY = 'ON_SEARCH_QUERY';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const ADD_PEOPLE_FROM_API = 'ADD_PEOPLE_FROM_API';
+const ADD_PEOPLE_DATA_API_TO_STATE_PEOPLE_DATA = 'ADD_PEOPLE_DATA_API_TO_STATE_PEOPLE_DATA';
 
 const initialState = {
   //если подчасть state не приходит в reducer, то используем эту подчасть state по умолчанию
@@ -38,15 +38,15 @@ const initialState = {
   isFetching: false, //запрос ПОСЫЛАЕТСЯ? False
 };
 
-const cardsReducer = (state = initialState, action) => {
+const peopleReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REPLACE_STATE_FROM_API:
+    case REPLACE_STATE_PEOPLE_DATA_BY_PEOPLE_DATA_API:
       return {
         //создаем объект и сразу возвращаем
         ...state,
         data: { ...action.data },
       };
-    case ADD_PEOPLE_FROM_API:
+    case ADD_PEOPLE_DATA_API_TO_STATE_PEOPLE_DATA:
       return {
         ...state,
         data: {
@@ -54,17 +54,28 @@ const cardsReducer = (state = initialState, action) => {
           results: [...state.data.results, ...action.data.results],
         },
       };
-    case ON_SEARCH_QUERY:
-      let foundCreatures = [];
-      for (let index = 0; index < state.results.length; index++) {
-        if (action.searchQuery == state.results[index].name) {
-          foundCreatures[index] += state.results[index];
-        }
-      }
-      //почему цикл срабатывает только один раз?
-      return {
-        results: [...foundCreatures],
-      };
+    // case REPLACE_HOMEWORLD_BY_DATA_API:
+
+    //   return {
+    //     ...state,
+    //     data: {
+    //       ...state.data,
+    //       results: [{
+
+    //       }]
+    //     }
+    //   };
+    // case ON_SEARCH_QUERY:
+    //   let foundCreatures = [];
+    //   for (let index = 0; index < state.results.length; index++) {
+    //     if (action.searchQuery == state.results[index].name) {
+    //       foundCreatures[index] += state.results[index];
+    //     }
+    //   }
+    //   //почему цикл срабатывает только один раз?
+    //   return {
+    //     results: [...foundCreatures],
+    //   };
     case TOGGLE_IS_FETCHING:
       return { ...state, isFetching: action.isFetching };
     default:
@@ -72,4 +83,4 @@ const cardsReducer = (state = initialState, action) => {
   }
 };
 
-export default cardsReducer;
+export default peopleReducer;

@@ -8,8 +8,8 @@ import Searcher from './Searcher/Searcher';
 export default function Main(props) {
   return (
     <main className={styles.main}>
-      <Searcher state={props.state}/>
-      <Cardspace stateData={props.stateData} appBodyRef={props.appBodyRef}/>
+      <Searcher state={props.state} />
+      <Cardspace peopleData={props.peopleData} appBodyRef={props.appBodyRef} />
     </main>
   );
 }
