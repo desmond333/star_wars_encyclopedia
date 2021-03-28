@@ -1,6 +1,6 @@
 import {
   replaceStatePeopleByPeopleAPIAsyncAC,
-  addPeopleAPItoStatePeople,
+  addPeopleAPItoStatePeopleAC,
 } from '../action_creators/peopleAllAC';
 import { replaceStatePlanetsByPlanetsAPIAsyncAC } from '../action_creators/planetsAllAC';
 
@@ -10,8 +10,9 @@ export const dataUploadedThunkCreator = (url) => {
   //возращаем функцию
   return function (dispatch) {
     getRequestSWAPI(url).then(function (data) {
+      //switch
       if (url.includes('people')) {
-        dispatch(addPeopleAPItoStatePeople(data));
+        dispatch(addPeopleAPItoStatePeopleAC(data));
       } else if (url.includes('planets')) {
         dispatch(replaceStatePlanetsByPlanetsAPIAsyncAC(data));
       }

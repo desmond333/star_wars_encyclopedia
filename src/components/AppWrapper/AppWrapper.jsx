@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { dataUploadedThunkCreator } from '../../store/thunk_creators/dataUploadedThunk';
+import {setIsLoadingAC} from '../../store/action_creators/peopleAllAC'
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -12,18 +13,24 @@ export default function AppWrapper() {
   const appBodyRef = useRef();
   const state = useSelector((state) => state);
   const peoplePageUrl = 'https://swapi.dev/api/people/?page=1';
-  const planetsUrl = 'https://swapi.dev/api/planets/1/';
+  const planetsUrl = 'https://swapi.dev/api/planets/';
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(dataUploadedThunkCreator(peoplePageUrl));
   }, []);
 
+  // if (state.planets.data.next != null) {
+  //   dispatch(dataUploadedThunkCreator(state.planets.data.next));
+  // }
   return (
     <div className="appbody" ref={appBodyRef}>
       <Header />
 
-      <Main peopleData={state.people.data} appBodyRef={appBodyRef} />
+      <Main
+        peopleData={state.people.data}
+        appBodyRef={appBodyRef}
+      />
       <button
         onClick={() => {
           dispatch(dataUploadedThunkCreator(state.people.data.next));

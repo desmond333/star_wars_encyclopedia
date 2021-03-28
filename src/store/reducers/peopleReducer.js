@@ -1,22 +1,17 @@
 const REPLACE_STATE_PEOPLE_DATA_BY_PEOPLE_DATA_API = 'REPLACE_STATE_PEOPLE_DATA_BY_PEOPLE_DATA_API'; //используем константы, чтобы не опечататься в строках
 const ON_SEARCH_QUERY = 'ON_SEARCH_QUERY';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const SET_IS_LOADING = 'SET_IS_LOADING';
 const ADD_PEOPLE_DATA_API_TO_STATE_PEOPLE_DATA = 'ADD_PEOPLE_DATA_API_TO_STATE_PEOPLE_DATA';
 
 const initialState = {
   //если подчасть state не приходит в reducer, то используем эту подчасть state по умолчанию
   data: {
     count: null,
-    next: 'people/?page=1',
+    next: 'https://swapi.dev/api/people/?page=1',
     previous: null,
     results: [
       {
         name: 'INITIAL STATE',
-        height: '0',
-        mass: '0',
-        hair_color: 'blond',
-        skin_color: 'fair',
-        eye_color: 'blue',
         birth_year: '000000',
         gender: 'INITIAL STATE',
         homeworld: 'http://swapi.dev/api/planets/1/',
@@ -27,19 +22,20 @@ const initialState = {
           'http://swapi.dev/api/films/6/',
         ],
         species: ['someone'],
-        vehicles: ['http://swapi.dev/api/vehicles/14/', 'http://swapi.dev/api/vehicles/30/'],
-        starships: ['http://swapi.dev/api/starships/12/', 'http://swapi.dev/api/starships/22/'],
-        created: '2014-12-09T13:50:51.644000Z',
-        edited: '2014-12-20T21:17:56.891000Z',
         url: 'http://swapi.dev/api/people/1/',
       },
     ],
   },
-  isFetching: false, //запрос ПОСЫЛАЕТСЯ? False
+  isLoading: false,
 };
 
 const peopleReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+      };
     case REPLACE_STATE_PEOPLE_DATA_BY_PEOPLE_DATA_API:
       return {
         //создаем объект и сразу возвращаем
@@ -54,17 +50,6 @@ const peopleReducer = (state = initialState, action) => {
           results: [...state.data.results, ...action.data.results],
         },
       };
-    // case REPLACE_HOMEWORLD_BY_DATA_API:
-
-    //   return {
-    //     ...state,
-    //     data: {
-    //       ...state.data,
-    //       results: [{
-
-    //       }]
-    //     }
-    //   };
     // case ON_SEARCH_QUERY:
     //   let foundCreatures = [];
     //   for (let index = 0; index < state.results.length; index++) {
@@ -76,8 +61,6 @@ const peopleReducer = (state = initialState, action) => {
     //   return {
     //     results: [...foundCreatures],
     //   };
-    case TOGGLE_IS_FETCHING:
-      return { ...state, isFetching: action.isFetching };
     default:
       return state;
   }

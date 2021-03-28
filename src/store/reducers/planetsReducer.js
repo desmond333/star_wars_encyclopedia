@@ -5,7 +5,12 @@ const REPLACE_STATE_PLANETS_BY_PLANETS_API = 'REPLACE_STATE_PLANETS_BY_PLANETS_A
 
 const initialState = {
   //если подчасть state не приходит в reducer, то используем эту подчасть state по умолчанию
-  results: [],
+  data: {
+    count: 60, 
+    next: "https://swapi.dev/api/planets/?page=1", 
+    previous: null, 
+    results: [],
+  },
   isFetching: false, //запрос ПОСЫЛАЕТСЯ? False
 };
 
@@ -15,7 +20,7 @@ const planetsReducer = (state = initialState, action) => {
       return {
         //создаем объект и сразу возвращаем
         ...state,
-        results: [{ ...action.data }],
+        data: { ...action.data, results: [...state.data.results, ...action.data.results] },
       };
     // case ADD_PEOPLE_DATA_API_TO_STATE_PEOPLE_DATA:
     //   return {

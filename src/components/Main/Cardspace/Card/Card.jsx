@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import styles from './Card.module.scss';
 
 import ModalArea from '../../../ModalArea/ModalArea';
+import { setIsLoadingAC } from '../../../../store/action_creators/peopleAllAC';
 
 export default function Card(props) {
   //с помощью хука useState создаем локальный стейт для открытия модального окна
@@ -15,6 +17,8 @@ export default function Card(props) {
   const cardIconRef = useRef();
 
   const heroNameRef = useRef();
+
+  const dispatch = useDispatch();
 
   //с помощью хука useEffect во время первой отрисовки сохраняем итоговый цвет и устанавливаем его для фона аватарки
   useEffect(() => {
@@ -38,7 +42,11 @@ export default function Card(props) {
   const onModalOpen = () => {
     props.appBodyRef.current.classList.add('blur');
     document.querySelector('body').classList.add('noScroll');
-    setOpen(true);
+    dispatch(setIsLoadingAC(true));
+    setTimeout(() => {
+      dispatch(setIsLoadingAC(false));
+      setOpen(true);
+    }, 2000);
   };
 
   return (
@@ -50,7 +58,9 @@ export default function Card(props) {
               {props.man.name[0]}
             </div>
           </div>
-          <p className={styles.card__heroName} ref={heroNameRef}>{props.man.name}</p>
+          <p className={styles.card__heroName} ref={heroNameRef}>
+            {props.man.name}
+          </p>
           <p className={styles.card__heroGender}>{props.man.gender}</p>
         </div>
       </li>

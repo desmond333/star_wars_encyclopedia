@@ -23,7 +23,11 @@ export default function Cardspace(props) {
               </p>
             }>
             {peopleData.results.map((man, index) => (
-              <Card key={`${man}_${index}`} man={man} appBodyRef={props.appBodyRef} />
+              <Card
+                key={`${man}_${index}`}
+                man={man}
+                appBodyRef={props.appBodyRef}
+              />
             ))}
           </InfiniteScroll>
         </ul>
