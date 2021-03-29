@@ -18,11 +18,22 @@ export default function AppWrapper() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(dataUploadedThunkCreator(peoplePageUrl));
+    // for(;;) {
+    //   if (state.planets.data.next != null) {
+    //     debugger
+    //     dispatch(dataUploadedThunkCreator(state.planets.data.next));
+    //   } else {
+    //     debugger
+    //     break;
+    //   }
+    // }
+    dispatch(dataUploadedThunkCreator(state.planets.data.next));
+    console.log(state.planets.data.next);
+    dispatch(dataUploadedThunkCreator(state.planets.data.next));
+    console.log(state.planets.data.next);
+    dispatch(dataUploadedThunkCreator(state.planets.data.next));
+    console.log(state.planets.data.next);
   }, []);
-
-  // if (state.planets.data.next != null) {
-  //   dispatch(dataUploadedThunkCreator(state.planets.data.next));
-  // }
   return (
     <div className="appbody" ref={appBodyRef}>
       <Header />
