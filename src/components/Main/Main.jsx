@@ -10,8 +10,6 @@ export default function Main(props) {
     <main className={styles.main}>
       <Searcher state={props.state} />
       <Cardspace
-        peopleData={props.peopleData}
-        isLoading={props.isLoading}
         appBodyRef={props.appBodyRef}
       />
     </main>

@@ -15,7 +15,10 @@ const planetsReducer = (state = initialState, action) => {
     case REPLACE_STATE_PLANETS_BY_PLANETS_API:
       return {
         //создаем объект и сразу возвращаем
-        data: { ...action.data, results: [...state.data.results, ...action.data.results] },
+        data: {
+          ...action.data,
+          results: [...state.data.results, ...action.data.results],
+        },
       };
     // case ADD_PEOPLE_DATA_API_TO_STATE_PEOPLE_DATA:
     //   return {
