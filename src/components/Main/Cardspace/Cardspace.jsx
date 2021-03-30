@@ -32,6 +32,7 @@ import { loadPeopleByPageIdThunk } from '../../../store/thunk_creators/loadPeopl
         <ul className={styles.cards__list}>
           <InfiniteScroll
             className={styles.cards__infiniteScroll}
+            style={{ overflow: 'visible'}}
             dataLength={peopleData.length}
             next={loadPeople}
             hasMore={hasMore}

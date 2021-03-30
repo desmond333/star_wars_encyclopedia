@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { onSearchQueryAC } from '../../../store/action_creators/onSearchQueryAC';
-
 import styles from './Searcher.module.scss';
 
 export default function Searcher() {

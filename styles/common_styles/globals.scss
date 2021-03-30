@@ -54,11 +54,11 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: filter linear 1s, transform linear 1s;
+  transition: filter linear 1s, margin linear 1s;
 }
 
 .blur {
   filter: blur(17px);
   overflow: hidden;
-  transform: scale(1.05); 
+  margin: 0 -25px 0 -25px; 
 }

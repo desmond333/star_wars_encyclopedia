@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import styles from './Card.module.scss';
 
 import ModalArea from '../../../ModalArea/ModalArea';
-import { setIsLoadingAC } from '../../../../store/action_creators/peopleAllAC';
+import { setIsLoading } from '../../../../store/action_creators/people';
 
 export default function Card(props) {
   //с помощью хука useState создаем локальный стейт для открытия модального окна
@@ -42,9 +42,9 @@ export default function Card(props) {
   const onModalOpen = () => {
     props.appBodyRef.current.classList.add('blur');
     document.querySelector('body').classList.add('noScroll');
-    dispatch(setIsLoadingAC(true));
+    dispatch(setIsLoading(true));
     setTimeout(() => {
-      dispatch(setIsLoadingAC(false));
+      dispatch(setIsLoading(false));
       setOpen(true);
     }, 2000);
   };
