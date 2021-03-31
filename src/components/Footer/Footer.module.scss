@@ -1,6 +1,8 @@
 @import '/styles/common_styles/common_vars.scss';
 
 .footer {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   height: 10vh;
   display: flex;
@@ -14,8 +16,238 @@
     align-items: center;
     font-weight: 500;
     color: $white;
-    font-size: 2vh;
-    letter-spacing: 0.2vh;
+    font-size: 2vmin;
+    letter-spacing: 0.2vmin;
     text-align: center;
+    // animation-play-state: paused;
+  }
+}
+
+//animations
+#cardsLoading {
+  animation: cardsLoading linear 1.5s;
+  animation-iteration-count: infinite;
+
+  -webkit-animation: cardsLoading linear 1.5s;
+  -webkit-animation-iteration-count: infinite;
+
+  -moz-animation: cardsLoading linear 1.5s;
+  -moz-animation-iteration-count: infinite;
+
+  -o-animation: cardsLoading linear 1.5s;
+  -o-animation-iteration-count: infinite;
+
+  -ms-animation: cardsLoading linear 1.5s;
+  -ms-animation-iteration-count: infinite;
+}
+
+@keyframes cardsLoading {
+  0% {
+    position: absolute;
+    left: -80%;
+    opacity: 1;
+  }
+  96% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 75%;
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes cardsLoading {
+  0% {
+    position: absolute;
+    left: -80%;
+    opacity: 1;
+  }
+  96% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 75%;
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes cardsLoading {
+  0% {
+    position: absolute;
+    left: -80%;
+    opacity: 1;
+  }
+  96% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 75%;
+    opacity: 0;
+  }
+}
+
+@-o-keyframes cardsLoading {
+  0% {
+    position: absolute;
+    left: -80%;
+    opacity: 1;
+  }
+  96% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 75%;
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes cardsLoading {
+  0% {
+    position: absolute;
+    left: -80%;
+    opacity: 1;
+  }
+  96% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 75%;
+    opacity: 0;
+  }
+}
+
+@keyframes cardsLoading992px {
+  0% {
+    position: absolute;
+    left: -90%;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 65%;
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes cardsLoading992px {
+  0% {
+    position: absolute;
+    left: -90%;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 65%;
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes cardsLoading992px {
+  0% {
+    position: absolute;
+    left: -90%;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 65%;
+    opacity: 0;
+  }
+}
+
+@-o-keyframes cardsLoading992px {
+  0% {
+    position: absolute;
+    left: -90%;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 65%;
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes cardsLoading992px {
+  0% {
+    position: absolute;
+    left: -90%;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.01;
+  }
+  100% {
+    position: absolute;
+    left: 65%;
+    opacity: 0;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: 992px) {
+  //animations
+  #cardsLoading {
+    animation: cardsLoading992px linear 1s;
+    animation-iteration-count: infinite;
+
+    -webkit-animation: cardsLoading992px linear 1s;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation: cardsLoading992px linear 1s;
+    -moz-animation-iteration-count: infinite;
+
+    -o-animation: cardsLoading992px linear 1s;
+    -o-animation-iteration-count: infinite;
+
+    -ms-animation: cardsLoading992px linear 1s;
+    -ms-animation-iteration-count: infinite;
   }
 }

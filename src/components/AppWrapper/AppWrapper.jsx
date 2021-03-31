@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, {useRef} from 'react';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -13,9 +12,7 @@ export default function AppWrapper() {
     <div className="appbody" ref={appBodyRef}>
       <Header />
 
-      <Main
-        appBodyRef={appBodyRef}
-      />
+      <Main appBodyRef={appBodyRef} />
 
       <Footer />
     </div>

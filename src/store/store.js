@@ -2,14 +2,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
-import people from './reducers/people';
+import peopleRr from './reducers/peopleRr';
 // переименуй по примеру выше
-import planetsReducer from './reducers/planetsReducer'
+import planetsRr from './reducers/planetsRr'
 
 const rootReducer = combineReducers({
   //смешиваем все reducer с помощью f combineReducers
-  people,
-  planets: planetsReducer,
+  people: peopleRr,
+  planets: planetsRr,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));

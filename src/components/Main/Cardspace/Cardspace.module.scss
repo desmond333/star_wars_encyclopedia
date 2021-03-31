@@ -10,9 +10,15 @@
     padding: 0;
   }
   .cards__infiniteScroll {
+    position: relative;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     min-height: 900px;
+  }
+  .miniLoader{
+    position: absolute;
+    background-color: red;
+    bottom: 1.5%;
   }
 }
