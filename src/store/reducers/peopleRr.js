@@ -25,6 +25,11 @@ const peopleRr = (state = initialState, action) => {
         nextPageId: action.payload.pageId,
         hasMore: !!action.payload.pageId,
       };
+    case AT.SET_HOMEWORLD:
+      return {
+        ...state,
+        allPeople: action.payload.withVisibleHomeworldPeople,
+      };
     default:
       return state;
   }

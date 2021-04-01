@@ -18,7 +18,8 @@
   }
   .miniLoader{
     position: absolute;
-    background-color: red;
-    bottom: 1.5%;
+    background-color: $white;
+    bottom: -2%;
+    padding: 10px;
   }
 }

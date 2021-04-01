@@ -20,3 +20,11 @@ export const setNextPeoplePageId = (id) => ({
     pageId: id,
   },
 });
+
+export const setHomeworld = (withVisibleHomeworldPeople) => ({
+  type: AT.SET_HOMEWORLD,
+  payload: {
+    withVisibleHomeworldPeople: withVisibleHomeworldPeople,
+  },
+});
+
