@@ -1,18 +1,25 @@
 import React, { useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector, useDispatch } from 'react-redux';
+
 import styles from './Cardspace.module.scss';
 import Card from './Card/Card';
+
 import { loadPeopleByPageIdThunk } from '../../../store/thunk_creators/loadPeopleByPageIdThunk';
 import { loadPlanetsByPageIdThunk } from '../../../store/thunk_creators/loadPlanetsByPageIdThunk';
-import { setHomeworld } from '../../../store/action_creators/peopleAC';
+import { setHomeworldInPeopleThunk } from '../../../store/thunk_creators/setHomeworldThunk';
 
 const Cardspace = ({ appBodyRef }) => {
   const dispatch = useDispatch();
 
   const allPeople = useSelector((state) => state.people.allPeople);
-  const allPlanets = useSelector((state) => state.planets.allPlanets);
   const nextPeoplePageId = useSelector((state) => state.people.nextPageId);
+  const allPlanets = useSelector((state) => {
+    if (state.planets.hasMore == false) {
+      return state.planets.allPlanets;
+    }
+    return;
+  });
   const nextPlanetsPageId = useSelector((state) => state.planets.nextPageId);
   const isLoading = useSelector((state) => state.people.isLoading);
   const hasMore = useSelector((state) => state.people.hasMore);
@@ -28,25 +35,19 @@ const Cardspace = ({ appBodyRef }) => {
     if (nextPlanetsPageId != undefined) {
       dispatch(loadPlanetsByPageIdThunk(nextPlanetsPageId));
     }
-    //после загрузки всех планет устанавливаем homeworld первым десяти людям и отправляем новый массив людей в peopleRr
+    //после загрузки всех планет устанавливаем homeworld первым десяти людям
     else {
-      let successPeopleCounter = 0;
-      let withVisibleHomeworldPeople = allPeople;
-      for (let i = 0; i < allPlanets.length; i++) {
-        //чтобы прекратить цикл заранее, когда цель выполнится досрочно
-        if (successPeopleCounter === withVisibleHomeworldPeople.length) {
-          break;
-        }
-        for (let j = 0; j < withVisibleHomeworldPeople.length; j++) {
-          if (withVisibleHomeworldPeople[j].homeworld === allPlanets[i].url) {
-            withVisibleHomeworldPeople[j].homeworld = allPlanets[i].name;
-            successPeopleCounter++;
-          }
-        }
-      }
-      dispatch(setHomeworld(withVisibleHomeworldPeople));
+      debugger;
+      dispatch(setHomeworldInPeopleThunk(nextPeoplePageId, allPeople, allPlanets));
     }
   }, [nextPlanetsPageId]);
+
+  //вот возможный вариант решения проблемы
+  // useEffect(() => {
+  //   if (nextPeoplePageId >= 3) {
+  //     dispatch(setHomeworldInPeopleThunk(nextPeoplePageId, allPeople, allPlanets));
+  //   }
+  // }, [allPeople]);
 
   //с помощью этой f загружаем следующую страницу с новыми людьми
   const loadPeople = () => {
@@ -54,6 +55,9 @@ const Cardspace = ({ appBodyRef }) => {
       return;
     }
     dispatch(loadPeopleByPageIdThunk(nextPeoplePageId));
+    //тут нужно получать обновленный массив людей, как это сделать?
+    //как обновить state после 56 строки и передать его в 59 строке?
+    dispatch(setHomeworldInPeopleThunk(nextPeoplePageId, allPeople, allPlanets));
   };
 
   return (

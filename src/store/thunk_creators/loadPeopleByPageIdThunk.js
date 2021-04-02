@@ -4,6 +4,7 @@ import { peopleUrl } from '../action_creators/constants';
 
 export const loadPeopleByPageIdThunk = (pageId) => {
   return (dispatch) => {
+    dispatch(setIsLoading(true));
     fetch(`${peopleUrl}?page=${pageId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -11,5 +12,6 @@ export const loadPeopleByPageIdThunk = (pageId) => {
         dispatch(addPeople(data.results));
         dispatch(setNextPeoplePageId(nextPageId));
       });
+    dispatch(setIsLoading(false));
   };
 };

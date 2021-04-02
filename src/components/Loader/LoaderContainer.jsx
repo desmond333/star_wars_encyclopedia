@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Loader from './Loader';
 
 export default function LoaderContainer(props) {
-  const state = useSelector((state) => state);
+  const isLoading = useSelector((state) => state.people.isLoading);
 
-  return <div>{state.people.isLoading && <Loader />}</div>;
+  return <div>{isLoading && <Loader />}</div>;
 }
