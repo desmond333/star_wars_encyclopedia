@@ -26,19 +26,11 @@ const peopleRr = (state = initialState, action) => {
         hasMore: !!action.payload.pageId,
       };
     case AT.SET_HOMEWORLD:
-      if (state.allPeople.length == 10) {
-        debugger;
-        return {
-          ...state,
-          allPeople: action.payload.withVisibleHomeworldPeople,
-        };
-      } else {
-        debugger;
-        return {
-          ...state,
-          allPeople: [...state.allPeople, ...action.payload.withVisibleHomeworldPeople],
-        };
-      }
+      //нужен только вначале, когда людей не более 10
+      return {
+        ...state,
+        allPeople: action.payload.withVisibleHomeworldPeople,
+      };
     default:
       return state;
   }

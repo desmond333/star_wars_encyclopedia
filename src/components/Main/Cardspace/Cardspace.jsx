@@ -14,6 +14,7 @@ const Cardspace = ({ appBodyRef }) => {
 
   const allPeople = useSelector((state) => state.people.allPeople);
   const nextPeoplePageId = useSelector((state) => state.people.nextPageId);
+
   const allPlanets = useSelector((state) => {
     if (state.planets.hasMore == false) {
       return state.planets.allPlanets;
@@ -21,12 +22,13 @@ const Cardspace = ({ appBodyRef }) => {
     return;
   });
   const nextPlanetsPageId = useSelector((state) => state.planets.nextPageId);
+  
   const isLoading = useSelector((state) => state.people.isLoading);
   const hasMore = useSelector((state) => state.people.hasMore);
 
   //добавляем в peopleRr первую страницу людей при первом рендере
   useEffect(() => {
-    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId));
+    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId, allPlanets));
   }, []);
 
   //добавляем в planetsRr все страницы планет сразу после первого рендера
@@ -37,27 +39,17 @@ const Cardspace = ({ appBodyRef }) => {
     }
     //после загрузки всех планет устанавливаем homeworld первым десяти людям
     else {
-      debugger;
-      dispatch(setHomeworldInPeopleThunk(nextPeoplePageId, allPeople, allPlanets));
+      dispatch(setHomeworldInPeopleThunk(allPeople, allPlanets));
     }
   }, [nextPlanetsPageId]);
-
-  //вот возможный вариант решения проблемы
-  // useEffect(() => {
-  //   if (nextPeoplePageId >= 3) {
-  //     dispatch(setHomeworldInPeopleThunk(nextPeoplePageId, allPeople, allPlanets));
-  //   }
-  // }, [allPeople]);
 
   //с помощью этой f загружаем следующую страницу с новыми людьми
   const loadPeople = () => {
     if (isLoading) {
       return;
     }
-    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId));
-    //тут нужно получать обновленный массив людей, как это сделать?
-    //как обновить state после 56 строки и передать его в 59 строке?
-    dispatch(setHomeworldInPeopleThunk(nextPeoplePageId, allPeople, allPlanets));
+    //в этом thunk только что загруженным людям добавляется homeworld, species, films
+    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId, allPlanets));
   };
 
   return (
