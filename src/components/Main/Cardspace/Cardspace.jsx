@@ -16,13 +16,14 @@ import { setFilmsInPeopleThunk } from '../../../store/thunk_creators/setFilmsThu
 const Cardspace = ({ appBodyRef }) => {
   const dispatch = useDispatch();
 
-  //people
+  //peopleRr
   const allPeople = useSelector((state) => state.people.allPeople);
   const nextPeoplePageId = useSelector((state) => state.people.nextPageId);
   const isLoading = useSelector((state) => state.people.isLoading);
+  const isSearching = useSelector((state) => state.people.isSearching);
   const hasMore = useSelector((state) => state.people.hasMore);
 
-  //homeworld
+  //planetsRr
   const allPlanets = useSelector((state) => {
     if (state.planets.hasMore == false) {
       return state.planets.allPlanets;
@@ -31,7 +32,7 @@ const Cardspace = ({ appBodyRef }) => {
   });
   const nextPlanetsPageId = useSelector((state) => state.planets.nextPageId);
 
-  //species
+  //speciesRr
   const allSpecies = useSelector((state) => {
     if (state.species.hasMore == false) {
       return state.species.allSpecies;
@@ -40,7 +41,7 @@ const Cardspace = ({ appBodyRef }) => {
   });
   const nextSpeciesPageId = useSelector((state) => state.species.nextPageId);
 
-  //films
+  //filmsRr
   const allFilms = useSelector((state) => {
     if (state.films.hasMore == false) {
       return state.films.allFilms;
@@ -48,6 +49,15 @@ const Cardspace = ({ appBodyRef }) => {
     return;
   });
   const nextFilmsPageId = useSelector((state) => state.films.nextPageId);
+
+  //searchRr
+  const isLoadingSearchRr = useSelector((state) => state.search.isLoadingSearchRr);
+  const allSearchablePeople = useSelector((state) => {
+    if (isLoadingSearchRr == false) {
+      return state.search.allSearchablePeople;
+    }
+    return;
+  });
 
   //добавляем в peopleRr первую страницу людей при первом рендере
   useEffect(() => {
@@ -103,22 +113,29 @@ const Cardspace = ({ appBodyRef }) => {
     <div className={styles.cards}>
       <div className={styles.cards__container}>
         <ul className={styles.cards__list}>
-          <InfiniteScroll
-            className={styles.cards__infiniteScroll}
-            style={{ overflow: 'visible' }}
-            dataLength={allPeople.length}
-            next={loadPeople}
-            hasMore={hasMore}
-            loader={<div className={styles.miniLoader}>Loading...</div>}
-            endMessage={
-              <p style={{ textAlign: 'center' }}>
-                <b>Yay! You have seen it all</b>
-              </p>
-            }>
-            {allPeople.map((man, index) => (
+          {isSearching &&
+            allSearchablePeople != undefined &&
+            allSearchablePeople.map((man, index) => (
               <Card key={`${man}_${index}`} man={man} appBodyRef={appBodyRef} />
             ))}
-          </InfiniteScroll>
+          {!isSearching && (
+            <InfiniteScroll
+              className={styles.cards__infiniteScroll}
+              style={{ overflow: 'visible' }}
+              dataLength={allPeople.length}
+              next={loadPeople}
+              hasMore={hasMore}
+              loader={<div className={styles.miniLoader}>Loading...</div>}
+              endMessage={
+                <p style={{ textAlign: 'center' }}>
+                  <b>Yay! You have seen it all</b>
+                </p>
+              }>
+              {allPeople.map((man, index) => (
+                <Card key={`${man}_${index}`} man={man} appBodyRef={appBodyRef} />
+              ))}
+            </InfiniteScroll>
+          )}
         </ul>
       </div>
     </div>

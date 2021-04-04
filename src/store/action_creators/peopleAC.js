@@ -14,6 +14,13 @@ export const setIsLoading = (bool) => ({
   },
 });
 
+export const setIsSearching = (bool) => ({
+  type: AT.SET_IS_SEARCHING,
+  payload: {
+    isSearching: bool,
+  },
+});
+
 export const setNextPeoplePageId = (id) => ({
   type: AT.SET_NEXT_PEOPLE_PAGE_ID,
   payload: {

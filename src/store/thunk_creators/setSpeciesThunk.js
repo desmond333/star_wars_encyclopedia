@@ -26,6 +26,5 @@ export const setPeopleWithVisibleSpecies = (allPeoplePart, allSpecies) => {
       }
     }
   }
-  debugger;
   return allPeoplePart;
 };

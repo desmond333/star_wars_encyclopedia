@@ -21,6 +21,5 @@ export const setPeopleWithVisibleFilms = (allPeoplePart, allFilms) => {
       }
     }
   }
-  debugger;
   return allPeoplePart;
 };

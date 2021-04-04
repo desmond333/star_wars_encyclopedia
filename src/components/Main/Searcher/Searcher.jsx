@@ -1,21 +1,47 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './Searcher.module.scss';
 
+import { setIsSearching } from '../../../store/action_creators/peopleAC';
+import { loadPeopleBySearchValueThunk } from '../../../store/thunk_creators/loadPeopleBySearchValue';
+
 export default function Searcher() {
   const dispatch = useDispatch();
+
+  //planetsRr
+  const allPlanets = useSelector((state) => {
+    if (state.planets.hasMore == false) {
+      return state.planets.allPlanets;
+    }
+    return;
+  });
+
+  //speciesRr
+  const allSpecies = useSelector((state) => {
+    if (state.species.hasMore == false) {
+      return state.species.allSpecies;
+    }
+    return;
+  });
+
+  //filmsRr
+  const allFilms = useSelector((state) => {
+    if (state.films.hasMore == false) {
+      return state.films.allFilms;
+    }
+    return;
+  });
+
   const onChangeInput = (e) => {
     const { value } = e.target; //деструктуризация
-    onSearch(value);
-    //почему первую введенную букву не воспринимают?
-    console.log(value);
-  };
-
-  const onSearch = (value) => {
-    if (value != null) {
-      dispatch(onSearchQueryAC(value));
+    if (value != '') {
+      dispatch(setIsSearching(true));
+      dispatch(loadPeopleBySearchValueThunk(value, allPlanets, allSpecies, allFilms));
+    } else {
+      dispatch(setIsSearching(false));
     }
+    console.log(value);
   };
 
   return (

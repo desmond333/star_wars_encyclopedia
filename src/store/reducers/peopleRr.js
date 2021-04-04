@@ -4,6 +4,7 @@ const initialState = {
   allPeople: [],
   nextPageId: 1,
   isLoading: false,
+  isSearching: false,
   hasMore: true,
 };
 
@@ -23,6 +24,11 @@ const peopleRr = (state = initialState, action) => {
       return {
         ...state,
         isLoading: action.payload.isLoading,
+      };
+    case AT.SET_IS_SEARCHING:
+      return {
+        ...state,
+        isSearching: action.payload.isSearching,
       };
     case AT.SET_NEXT_PEOPLE_PAGE_ID:
       return {
