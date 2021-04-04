@@ -8,13 +8,21 @@ import Card from './Card/Card';
 import { loadPeopleByPageIdThunk } from '../../../store/thunk_creators/loadPeopleByPageIdThunk';
 import { loadPlanetsByPageIdThunk } from '../../../store/thunk_creators/loadPlanetsByPageIdThunk';
 import { setHomeworldInPeopleThunk } from '../../../store/thunk_creators/setHomeworldThunk';
+import { loadSpeciesByPageIdThunk } from '../../../store/thunk_creators/loadSpeciesByPageIdThunk';
+import { setSpeciesInPeopleThunk } from '../../../store/thunk_creators/setSpeciesThunk';
+import { loadFilmsByPageIdThunk } from '../../../store/thunk_creators/loadFilmsByPageIdThunk';
+import { setFilmsInPeopleThunk } from '../../../store/thunk_creators/setFilmsThunk';
 
 const Cardspace = ({ appBodyRef }) => {
   const dispatch = useDispatch();
 
+  //people
   const allPeople = useSelector((state) => state.people.allPeople);
   const nextPeoplePageId = useSelector((state) => state.people.nextPageId);
+  const isLoading = useSelector((state) => state.people.isLoading);
+  const hasMore = useSelector((state) => state.people.hasMore);
 
+  //homeworld
   const allPlanets = useSelector((state) => {
     if (state.planets.hasMore == false) {
       return state.planets.allPlanets;
@@ -22,18 +30,33 @@ const Cardspace = ({ appBodyRef }) => {
     return;
   });
   const nextPlanetsPageId = useSelector((state) => state.planets.nextPageId);
-  
-  const isLoading = useSelector((state) => state.people.isLoading);
-  const hasMore = useSelector((state) => state.people.hasMore);
+
+  //species
+  const allSpecies = useSelector((state) => {
+    if (state.species.hasMore == false) {
+      return state.species.allSpecies;
+    }
+    return;
+  });
+  const nextSpeciesPageId = useSelector((state) => state.species.nextPageId);
+
+  //films
+  const allFilms = useSelector((state) => {
+    if (state.films.hasMore == false) {
+      return state.films.allFilms;
+    }
+    return;
+  });
+  const nextFilmsPageId = useSelector((state) => state.films.nextPageId);
 
   //добавляем в peopleRr первую страницу людей при первом рендере
   useEffect(() => {
-    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId, allPlanets));
+    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId));
   }, []);
 
   //добавляем в planetsRr все страницы планет сразу после первого рендера
   useEffect(() => {
-    //это бесконечный цикл с условием его завершения благодаря зависимости в useEffect от nextPlanetsPageId
+    //это бесконечный цикл благодаря зависимости в useEffect от pageId с 1 условием для выхода из него
     if (nextPlanetsPageId != undefined) {
       dispatch(loadPlanetsByPageIdThunk(nextPlanetsPageId));
     }
@@ -43,13 +66,37 @@ const Cardspace = ({ appBodyRef }) => {
     }
   }, [nextPlanetsPageId]);
 
+  //добавляем в speciesRr все страницы рас сразу после первого рендера
+  useEffect(() => {
+    //это бесконечный цикл благодаря зависимости в useEffect от pageId с 1 условием для выхода из него
+    if (nextSpeciesPageId != undefined) {
+      dispatch(loadSpeciesByPageIdThunk(nextSpeciesPageId));
+    }
+    //после загрузки всех рас устанавливаем species первым десяти людям
+    else {
+      dispatch(setSpeciesInPeopleThunk(allPeople, allSpecies));
+    }
+  }, [nextSpeciesPageId]);
+
+  //добавляем в filmsRr все страницы фильмов сразу после первого рендера
+  useEffect(() => {
+    //это бесконечный цикл благодаря зависимости в useEffect от pageId с 1 условием для выхода из него
+    if (nextFilmsPageId != undefined) {
+      dispatch(loadFilmsByPageIdThunk(nextFilmsPageId));
+    }
+    //после загрузки всех рас устанавливаем films первым десяти людям
+    else {
+      dispatch(setFilmsInPeopleThunk(allPeople, allFilms));
+    }
+  }, [nextFilmsPageId]);
+
   //с помощью этой f загружаем следующую страницу с новыми людьми
   const loadPeople = () => {
     if (isLoading) {
       return;
     }
     //в этом thunk только что загруженным людям добавляется homeworld, species, films
-    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId, allPlanets));
+    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId, allPlanets, allSpecies, allFilms));
   };
 
   return (

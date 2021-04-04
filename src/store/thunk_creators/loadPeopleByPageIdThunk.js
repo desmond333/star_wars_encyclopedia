@@ -1,8 +1,11 @@
 import { addPeople, setIsLoading, setNextPeoplePageId } from '../action_creators/peopleAC';
-import { setPeopleWithVisibleHomeworld } from './setHomeworldThunk';
 import { peopleUrl } from '../action_creators/constants';
 
-export const loadPeopleByPageIdThunk = (pageId, allPlanets) => {
+import { setPeopleWithVisibleHomeworld } from './setHomeworldThunk';
+import { setPeopleWithVisibleSpecies } from './setSpeciesThunk';
+import { setPeopleWithVisibleFilms } from './setFilmsThunk';
+
+export const loadPeopleByPageIdThunk = (pageId, allPlanets, allSpecies, allFilms) => {
   return (dispatch) => {
     dispatch(setIsLoading(true));
     if (pageId == 1) {
@@ -20,12 +23,24 @@ export const loadPeopleByPageIdThunk = (pageId, allPlanets) => {
         .then((data) => {
           const nextPageId = data?.next?.slice(34);
           dispatch(setNextPeoplePageId(nextPageId));
-          //тут пишем логику по изменению homeworld
+          //далее логика для изменения homeworld
           const withVisibleHomeworldPeople = setPeopleWithVisibleHomeworld(
             data.results,
             allPlanets,
           );
-          dispatch(addPeople(withVisibleHomeworldPeople));
+          //далее логика для изменения species
+          const withVisibleSpeciesPeople = setPeopleWithVisibleSpecies(
+            withVisibleHomeworldPeople,
+            allSpecies,
+          );
+          //далее логика для изменения films
+          const withVisibleFilmsPeople = setPeopleWithVisibleFilms(
+            withVisibleSpeciesPeople,
+            allFilms,
+          );
+          //чтобы увеличить скорость изменения вторичных данных, 
+          //возращаем уже модифицированный массив с людьми
+          dispatch(addPeople(withVisibleFilmsPeople));
         });
     }
     dispatch(setIsLoading(false));

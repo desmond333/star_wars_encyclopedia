@@ -12,7 +12,12 @@ const peopleRr = (state = initialState, action) => {
     case AT.ADD_PEOPLE:
       return {
         ...state,
-        allPeople: [...state.allPeople, ...action.payload.data],
+        allPeople: [
+          ...state.allPeople,
+          ...action.payload.data.map((man) => {
+            return { ...man, species: [...man.species], films: [...man.films] };
+          }),
+        ],
       };
     case AT.SET_IS_LOADING:
       return {
@@ -30,6 +35,18 @@ const peopleRr = (state = initialState, action) => {
       return {
         ...state,
         allPeople: action.payload.withVisibleHomeworldPeople,
+      };
+    case AT.SET_SPECIES:
+      //нужен только вначале, когда людей не более 10
+      return {
+        ...state,
+        allPeople: action.payload.withVisibleSpeciesPeople,
+      };
+    case AT.SET_FILMS:
+      //нужен только вначале, когда людей не более 10
+      return {
+        ...state,
+        allPeople: action.payload.withVisibleFilmsPeople,
       };
     default:
       return state;

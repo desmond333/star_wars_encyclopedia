@@ -1,15 +1,16 @@
 import { addSpecies, setNextSpeciesPageId } from '../action_creators/speciesAC';
 
-import { planetsUrl } from '../action_creators/constants';
+import { speciesUrl } from '../action_creators/constants';
 
-export const loadPlanetsByPageIdThunk = (pageId) => {
+export const loadSpeciesByPageIdThunk = (pageId) => {
   return (dispatch) => {
-    fetch(`${planetsUrl}?page=${pageId}`)
+    fetch(`${speciesUrl}?page=${pageId}`)
       .then((res) => res.json())
       .then((data) => {
         const nextPageId = data?.next?.slice(35);
-        dispatch(addPlanets(data.results));
-        dispatch(setNextPlanetsPageId(nextPageId));
+
+        dispatch(addSpecies(data.results));
+        dispatch(setNextSpeciesPageId(nextPageId));
       });
   };
 };

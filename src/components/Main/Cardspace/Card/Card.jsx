@@ -68,9 +68,13 @@ export default function Card(props) {
         isOpen={open}
         setOpen={setOpen}
         finalСolorValue={finalСolorValue}
-        man={props.man}
         appBodyRef={props.appBodyRef}
-        filmsList={['Never give up', 'Van Helsing', 'Flipped']}
+        name={props.man.name}
+        birth_year={props.man.birth_year}
+        species={props.man.species[0]}
+        gender={props.man.gender}
+        homeworld={props.man.homeworld}
+        filmsList={props.man.films}
       />
     </div>
   );

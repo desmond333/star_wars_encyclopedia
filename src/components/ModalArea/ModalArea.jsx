@@ -47,9 +47,9 @@ export default function ModalArea(props) {
         <div className={styles.modal__inner}>
           <div className={styles.modal__header}>
             <div className={styles.modal__headerAvatar} ref={avatarRef}>
-              {props.man.name[0]}
+              {props.name[0]}
             </div>
-            <div className={styles.modal__headerName}>{props.man.name}</div>
+            <div className={styles.modal__headerName}>{props.name}</div>
             <div className={styles.modal__headerBackground}></div>
           </div>
           <div className={styles.modal__middle}>
@@ -59,22 +59,22 @@ export default function ModalArea(props) {
             <div className={styles.footer__item}>
               <div className={styles.footer__itemIcon}></div>
               <div className={styles.footer__itemText}>Birth Year</div>
-              <div className={styles.footer__itemValue}>{props.man.birth_year}</div>
+              <div className={styles.footer__itemValue}>{props.birth_year}</div>
             </div>
             <div className={styles.footer__item}>
               <div className={styles.footer__itemIcon}></div>
               <div className={styles.footer__itemText}>Species</div>
-              <div className={styles.footer__itemValue}>{props.man.species}</div>
+              <div className={styles.footer__itemValue}>{props.species}</div>
             </div>
             <div className={styles.footer__item}>
               <div className={styles.footer__itemIcon}></div>
               <div className={styles.footer__itemText}>Gender</div>
-              <div className={styles.footer__itemValue}>{props.man.gender}</div>
+              <div className={styles.footer__itemValue}>{props.gender}</div>
             </div>
             <div className={styles.footer__item}>
               <div className={styles.footer__itemIcon}></div>
               <div className={styles.footer__itemText}>Homeworld</div>
-              <div className={styles.footer__itemValue}>{props.man.homeworld}</div>
+              <div className={styles.footer__itemValue}>{props.homeworld}</div>
             </div>
             <div className={styles.footer__item}>
               <div className={styles.footer__itemIcon}></div>

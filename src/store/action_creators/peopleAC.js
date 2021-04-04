@@ -28,3 +28,17 @@ export const setHomeworld = (withVisibleHomeworldPeople) => ({
   },
 });
 
+export const setSpecies = (withVisibleSpeciesPeople) => ({
+  type: AT.SET_SPECIES,
+  payload: {
+    withVisibleSpeciesPeople,
+  },
+});
+
+export const setFilms = (withVisibleFilmsPeople) => ({
+  type: AT.SET_FILMS,
+  payload: {
+    withVisibleFilmsPeople,
+  },
+});
+
