@@ -6,12 +6,13 @@ import styles from './Searcher.module.scss';
 import { setIsSearching } from '../../../store/action_creators/peopleAC';
 import { loadPeopleBySearchValueThunk } from '../../../store/thunk_creators/loadPeopleBySearchValue';
 
-export default function Searcher() {
+const Searcher = () => {
   //загрузились ли вторичные данные
   const [stateAllSecondaryData, setStateAllSecondaryData] = useState(false);
 
   const dispatch = useDispatch();
 
+  // вынести селекторы в отдельную папку
   //planetsRr
   const allPlanets = useSelector((state) => {
     if (state.planets.hasMore == false) {
@@ -46,6 +47,7 @@ export default function Searcher() {
     const { value } = e.target; //деструктуризация
     if (value != '' && stateAllSecondaryData != false) {
       dispatch(setIsSearching(true));
+      // получать доступ к  allPlanets, allSpecies, allFilms уже внутри loadPeopleBySearchValueThunk а не передавая туда аргументы отсюда
       dispatch(loadPeopleBySearchValueThunk(value, allPlanets, allSpecies, allFilms));
     } else {
       dispatch(setIsSearching(false));
@@ -109,3 +111,5 @@ export default function Searcher() {
     </div>
   );
 }
+
+export default Searcher;

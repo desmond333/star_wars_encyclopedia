@@ -62,7 +62,7 @@ const Cardspace = ({ appBodyRef }) => {
 
   //добавляем в peopleRr первую страницу людей при первом рендере
   useEffect(() => {
-    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId));
+    dispatch(loadPeopleByPageIdThunk());
   }, []);
 
   //добавляем в planetsRr все страницы планет сразу после первого рендера
@@ -107,7 +107,7 @@ const Cardspace = ({ appBodyRef }) => {
       return;
     }
     //в этом thunk только что загруженным людям добавляется homeworld, species, films
-    dispatch(loadPeopleByPageIdThunk(nextPeoplePageId, allPlanets, allSpecies, allFilms));
+    dispatch(loadPeopleByPageIdThunk());
   };
 
   return (
@@ -126,7 +126,7 @@ const Cardspace = ({ appBodyRef }) => {
             <InfiniteScroll
               className={styles.cards__infiniteScroll}
               style={{ overflow: 'visible' }}
-              dataLength={allPeople.length}
+              dataLength={allPeople?.length || 0}
               next={loadPeople}
               hasMore={hasMore}
               loader={<div className={styles.miniLoader}>Loading...</div>}
@@ -135,7 +135,7 @@ const Cardspace = ({ appBodyRef }) => {
                   <b>Yay! You have seen it all</b>
                 </p>
               }>
-              {allPeople.map((man, index) => (
+              {allPeople?.map((man, index) => (
                 <Card key={`${man}_${index}`} man={man} appBodyRef={appBodyRef} />
               ))}
             </InfiniteScroll>

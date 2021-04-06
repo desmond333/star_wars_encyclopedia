@@ -1,48 +1,58 @@
+import find from 'lodash/find';
 import { addPeople, setIsLoading, setNextPeoplePageId } from '../action_creators/peopleAC';
 import { peopleUrl } from '../action_creators/constants';
 
-import { setPeopleWithVisibleHomeworld } from './setHomeworldThunk';
-import { setPeopleWithVisibleSpecies } from './setSpeciesThunk';
-import { setPeopleWithVisibleFilms } from './setFilmsThunk';
+const getAllPlanets = (state) => state.planets.allPlanets;
+const getAllSpecies = (state) => state.species.allSpecies;
+const getAllFilms = (state) => state.films.allFilms;
+const getNextPageId = (state) => state.people.nextPageId;
 
-export const loadPeopleByPageIdThunk = (pageId, allPlanets, allSpecies, allFilms) => {
-  return (dispatch) => {
-    dispatch(setIsLoading(true));
-    if (pageId == 1) {
-      fetch(`${peopleUrl}?page=${pageId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          const nextPageId = data?.next?.slice(34);
-          dispatch(setNextPeoplePageId(nextPageId));
+const addPropsForPeople = (data, allPlanets, allSpecies, allFilms) => {
+  console.log('data:', data)
+  const people = data.map((item) => {
+    const homeworld = find(allPlanets, { url: item.homeworld })?.name;
 
-          dispatch(addPeople(data.results));
-        });
-    } else {
-      fetch(`${peopleUrl}?page=${pageId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          const nextPageId = data?.next?.slice(34);
-          dispatch(setNextPeoplePageId(nextPageId));
-          //далее логика для изменения homeworld
-          const withVisibleHomeworldPeople = setPeopleWithVisibleHomeworld(
-            data.results,
-            allPlanets,
-          );
-          //далее логика для изменения species
-          const withVisibleSpeciesPeople = setPeopleWithVisibleSpecies(
-            withVisibleHomeworldPeople,
-            allSpecies,
-          );
-          //далее логика для изменения films
-          const withVisibleFilmsPeople = setPeopleWithVisibleFilms(
-            withVisibleSpeciesPeople,
-            allFilms,
-          );
-          //чтобы увеличить скорость изменения вторичных данных, 
-          //возращаем уже модифицированный массив с людьми
-          dispatch(addPeople(withVisibleFilmsPeople));
-        });
+    const species = item.species.map((specieUrl) => {
+      return find(allSpecies, { url: specieUrl })?.name;
+    });
+
+    const films = item.films.map((filmUrl) => {
+      return find(allFilms, { url: filmUrl })?.title;
+    });
+
+    return {
+      ...item,
+      homeworld,
+      species,
+      films,
     }
-    dispatch(setIsLoading(false));
+  });
+
+  console.log('peopleData:', people)
+
+  return people;
+}
+
+export const loadPeopleByPageIdThunk = () => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const allPlanets = getAllPlanets(state);
+    const allSpecies = getAllSpecies(state);
+    const allFilms = getAllFilms(state);
+    const nextPeoplePageId = getNextPageId(state);
+
+    dispatch(setIsLoading(true));
+
+    fetch(`${peopleUrl}?page=${nextPeoplePageId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const nextPageId = data?.next?.slice(34);
+        dispatch(setNextPeoplePageId(nextPageId));
+
+        const people = addPropsForPeople(data.results, allPlanets, allSpecies, allFilms);
+
+        dispatch(addPeople(people));
+        dispatch(setIsLoading(false));
+      });
   };
 };

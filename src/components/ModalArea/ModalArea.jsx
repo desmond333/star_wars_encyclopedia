@@ -79,7 +79,7 @@ export default function ModalArea(props) {
             <div className={styles.footer__item}>
               <div className={styles.footer__itemIcon}></div>
               <div className={styles.footer__itemText}>Films</div>
-              <div className={styles.footer__itemValue}>{filmsElementsRender()}</div>
+              <div className={styles.footer__filmsContainer}>{filmsElementsRender()}</div>
             </div>
           </div>
         </div>

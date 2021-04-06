@@ -15,9 +15,7 @@ const peopleRr = (state = initialState, action) => {
         ...state,
         allPeople: [
           ...state.allPeople,
-          ...action.payload.data.map((man) => {
-            return { ...man, species: [...man.species], films: [...man.films] };
-          }),
+          ...action.payload.data
         ],
       };
     case AT.SET_IS_LOADING:

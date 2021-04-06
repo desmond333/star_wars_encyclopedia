@@ -107,6 +107,16 @@ $font-size_modalcard: 24px;
   align-items: center;
   font-size: 18px;
 
+  .footer__itemText {
+    font-weight: 400;
+    color: $gray;
+  }
+
+  .footer__filmsContainer {
+    height: 80px;
+    overflow-y: auto;
+  }
+
   //1 footer__item
   &:nth-child(1) {
     grid-row: 1;
@@ -183,11 +193,11 @@ $font-size_modalcard: 24px;
       background-repeat: no-repeat;
     }
     //5 footer__itemText
-    & > div:nth-child(2) {
-      display: flex;
-      height: 50%;
-      align-items: center;
-    }
+    // & > div:nth-child(2) {
+    //   display: flex;
+    //   height: 50%;
+    //   align-items: center;
+    // }
     //5 footer__itemValue
     & > div:nth-child(3) {
       display: grid;
@@ -196,10 +206,10 @@ $font-size_modalcard: 24px;
   }
 
   //all footer__itemText
-  & > div:nth-child(2) {
-    font-weight: 400;
-    color: $gray;
-  }
+  // & > div:nth-child(2) {
+  //   font-weight: 400;
+  //   color: $gray;
+  // }
   //all footer__itemValue
   & > div:nth-child(3) {
     font-weight: bold;
