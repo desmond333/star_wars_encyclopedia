@@ -10,7 +10,7 @@ export default function Card(props) {
   //с помощью хука useState создаем локальный стейт для открытия модального окна
   const [open, setOpen] = useState(false);
 
-  //с помощью хука useState создаем локальный стейт для открытия модального окна
+  //с помощью хука useState создаем локальный стейт для сохранения итогового цвета
   const [finalСolorValue, setFinalСolorValue] = useState('#555555');
 
   //с помощью хука useRef создаем ссылку на div card
@@ -45,6 +45,7 @@ export default function Card(props) {
     dispatch(setIsLoading(true));
     setTimeout(() => {
       dispatch(setIsLoading(false));
+
       setOpen(true);
     }, 2000);
   };

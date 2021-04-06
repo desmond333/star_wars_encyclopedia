@@ -7,9 +7,16 @@ export const addSearchablePeople = (data) => ({
   },
 });
 
-export const setIsLoading = (bool) => ({
-  type: AT.SET_IS_LOADING,
+export const setIsLoadingSearch = (bool) => ({
+  type: AT.SET_IS_LOADING_SEARCH,
   payload: {
-    isLoading: bool,
+    isLoadingSearchRr: bool,
+  },
+});
+
+export const setIsFound = (bool) => ({
+  type: AT.SET_IS_FOUND,
+  payload: {
+    isFound: bool,
   },
 });

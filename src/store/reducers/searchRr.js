@@ -2,7 +2,8 @@ import AT from '../action_creators/constants';
 
 const initialState = {
   allSearchablePeople: [],
-  isLoadingSearchRr: true,
+  isLoadingSearchRr: false,
+  isFound: 'initial',
 };
 
 const searchRr = (state = initialState, action) => {
@@ -11,10 +12,15 @@ const searchRr = (state = initialState, action) => {
       return {
         allSearchablePeople: [...action.payload.data],
       };
-    case AT.SET_IS_LOADING:
+    case AT.SET_IS_LOADING_SEARCH:
       return {
         ...state,
-        isLoadingSearchRr: action.payload.isLoading,
+        isLoadingSearchRr: action.payload.isLoadingSearchRr,
+      };
+    case AT.SET_IS_FOUND:
+      return {
+        ...state,
+        isFound: action.payload.isFound,
       };
     default:
       return state;

@@ -52,6 +52,7 @@ const Cardspace = ({ appBodyRef }) => {
 
   //searchRr
   const isLoadingSearchRr = useSelector((state) => state.search.isLoadingSearchRr);
+  const isFound = useSelector((state) => state.search.isFound);
   const allSearchablePeople = useSelector((state) => {
     if (isLoadingSearchRr == false) {
       return state.search.allSearchablePeople;
@@ -118,6 +119,9 @@ const Cardspace = ({ appBodyRef }) => {
             allSearchablePeople.map((man, index) => (
               <Card key={`${man}_${index}`} man={man} appBodyRef={appBodyRef} />
             ))}
+          {isSearching && !isFound && (
+            <div className={styles.cards__noFound}>No found. Let's try again.</div>
+          )}
           {!isSearching && (
             <InfiniteScroll
               className={styles.cards__infiniteScroll}
