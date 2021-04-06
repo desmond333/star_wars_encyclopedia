@@ -103,12 +103,7 @@ export default function Searcher() {
             placeholder="Search by name"
             data-autoresize></input>
           <span className={styles.form__line}></span>
-          <button
-            className={styles.form__button}
-            type="submit"
-            onClick={() => {
-              console.log(searchQuery);
-            }}></button>
+          <button className={styles.form__button} type="submit"></button>
         </div>
       </form>
     </div>

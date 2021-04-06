@@ -21,7 +21,7 @@ $font-size_modalcard: 24px;
   background-size: cover;
   width: 33.3em;
   height: 20.5em;
-  padding: 3.33em;
+  padding: 3em 2.5em 2em 2.5em;
   border-radius: 8px;
   box-shadow: 0 0.47em 0.625em rgba(0, 0, 0, 0.6);
   font-weight: bold;
@@ -172,6 +172,7 @@ $font-size_modalcard: 24px;
     grid-row: 2/4;
     grid-column: 2;
     align-items: initial;
+    font-size: 15px;
     //5 footer__itemIcon
     & > div:nth-child(1) {
       background: url('../../../public/assets/images/icons/films.svg');
@@ -190,9 +191,7 @@ $font-size_modalcard: 24px;
     //5 footer__itemValue
     & > div:nth-child(3) {
       display: grid;
-      align-items: flex-end;
-      padding-top: 4%;
-      font-size: 11px;
+      align-items: flex-start;
     }
   }
 
@@ -373,6 +372,10 @@ $font-size_modalcard: 24px;
   }
   .footer__item {
     font-size: 18px * $decrease_constant;
+    //5 footer__item
+    &:nth-child(5) {
+      font-size: 15px * $decrease_constant;
+    }
   }
 }
 /*==========  Desktop First  ==========*/
@@ -408,6 +411,9 @@ $font-size_modalcard: 24px;
     grid-template-rows: 1fr 3fr;
     grid-template-columns: 1fr 4fr;
   }
+  .modal__headerName {
+    justify-content: center;
+  }
   .modal__headerBackground {
     grid-column: 1 / 4;
   }
@@ -430,11 +436,13 @@ $font-size_modalcard: 24px;
   .modal__card {
     width: 80vw;
   }
-  .modal__headerName {
-    justify-content: center;
+  .modal__inner {
+    display: grid;
+    grid-template-rows: 0.5fr 0.5fr 3fr;
   }
   .modal__footer {
     display: grid;
+    max-height: 45vh;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
     .footer__item {
@@ -477,7 +485,7 @@ $font-size_modalcard: 24px;
 @media screen and (orientation: portrait) and (max-width: 480px) {
   @include decrease(0.7);
   .modal__card {
-    height: 80vh;
+    height: 90vh;
     padding: 2em;
   }
   .modal__middleBorder {

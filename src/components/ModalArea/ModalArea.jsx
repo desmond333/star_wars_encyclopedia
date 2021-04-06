@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import styles from './ModalArea.module.scss';
 

@@ -1,79 +1,96 @@
 @import '/styles/common_styles/common_vars.scss';
 
-.search {
-  .form {
-    width: 75vw;
-    max-width: 600px;
-  }
-  .form__group {
-    margin-bottom: 1.5rem;
-    position: relative;
-  }
+.form {
+  width: 75vw;
+  max-width: 600px;
+}
+.form__group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
 
-  .form__control {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 0 0.75rem;
-    overflow: hidden;
-    resize: none;
-    background: none;
-    border: none;
-    border-bottom: 1px solid #b4b4b4;
-    border-radius: 0;
-    box-shadow: none;
-    color: $white;
-    font-family: inherit;
+.form__control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0 0.5rem;
+  overflow: hidden;
+  resize: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #b4b4b4;
+  border-radius: 0;
+  box-shadow: none;
+  color: $white;
+  font-family: inherit;
+  font-size: 18px;
+
+  &::placeholder {
+    color: #b4b4b4;
     font-size: 18px;
-
-    &::placeholder {
-      color: #b4b4b4;
-      font-size: 18px;
-    }
-
-    &:focus + .form__line {
-      width: 100%;
-    }
   }
 
-  .form__line {
-    width: 0;
-    height: 1px;
+  &:focus + .form__line {
+    width: 100%;
+  }
+}
 
-    background-color: $yellow;
+.form__line {
+  width: 0;
+  height: 1px;
 
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: 1;
+  background-color: $yellow;
 
-    transition: width 0.3s linear;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+
+  transition: width 0.3s linear;
+}
+
+.form__footer-list {
+  display: flex;
+  justify-content: center;
+
+  font-size: 1.2rem;
+  line-height: 1.2;
+
+  li {
+    margin: 0 0.5rem;
   }
 
-  .form__footer-list {
-    display: flex;
-    justify-content: center;
-
-    font-size: 1.2rem;
-    line-height: 1.2;
-
-    li {
-      margin: 0 0.5rem;
-    }
-
-    a {
-      color: $white;
-    }
+  a {
+    color: $white;
   }
+}
+.form__button {
+  position: absolute;
+  right: 5px;
+  bottom: 6px;
+  background-image: url('../../../../public/assets/images/icons/search.svg');
+  background-size: cover;
+  background-position: center;
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+/* Small Devices, Tablets */
+@media only screen and (orientation: portrait) and (max-width: 768px) {
+}
+
+/* Extra Small Devices, Phones */
+@media screen and (orientation: portrait) and (max-width: 480px) {
+  .form__control {
+    font-size: 12px;
+  }
+
   .form__button {
-    position: absolute;
-    right: 7px;
-    bottom: 12px;
-    background-image: url('../../../../public/assets/images/icons/search.svg');
-    width: 25px;
-    height: 25px;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
+    right: 0px;
+    bottom: 5px;
+    width: 20px;
+    height: 20px;
   }
 }
