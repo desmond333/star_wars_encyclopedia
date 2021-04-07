@@ -12,6 +12,7 @@ const Searcher = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
+  const isLoading = Sel.getIsLoading(state);
   const nextPlanetsPageId = Sel.getNextPlanetsPageId(state);
   const nextSpeciesPageId = Sel.getNextSpeciesPageId(state);
   const nextFilmsPageId = Sel.getNextFilmsPageId(state);
@@ -31,7 +32,9 @@ const Searcher = () => {
   //Обнуляем значение в input при перезагрузке страницы
   const inputRef = useRef();
   useEffect(() => {
-    inputRef.current.value = '';
+    if (inputRef.current != undefined) {
+      inputRef.current.value = '';
+    }
   }, []);
 
   let onChangeInput = (e) => {
@@ -49,18 +52,20 @@ const Searcher = () => {
 
   return (
     <div className={styles.search}>
-      <form className={styles.form}>
-        <div className={styles.form__group}>
-          <input
-            className={styles.form__control}
-            onChange={onChangeInput}
-            placeholder="Search by name"
-            data-autoresize
-            ref={inputRef}></input>
-          <span className={styles.form__line}></span>
-          <button className={styles.form__button} type="submit"></button>
-        </div>
-      </form>
+      {!isLoading && (
+        <form className={styles.form}>
+          <div className={styles.form__group}>
+            <input
+              className={styles.form__control}
+              onChange={onChangeInput}
+              placeholder="Search by name"
+              data-autoresize
+              ref={inputRef}></input>
+            <span className={styles.form__line}></span>
+            <button className={styles.form__button} type="submit"></button>
+          </div>
+        </form>
+      )}
     </div>
   );
 };

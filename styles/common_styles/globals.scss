@@ -60,5 +60,6 @@ a {
 .blur {
   filter: blur(17px);
   overflow: hidden;
-  margin: 0 -25px 0 -25px; 
+  // margin: 0 -25px 0 -25px;
+  margin: 0;
 }
