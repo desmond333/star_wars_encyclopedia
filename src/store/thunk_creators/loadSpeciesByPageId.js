@@ -1,6 +1,6 @@
-import { addSpecies, setNextSpeciesPageId } from '../action_creators/speciesAC';
+import { addSpecies, setNextSpeciesPageId } from '../action_creators/species';
 
-import { speciesUrl } from '../action_creators/constants';
+import { speciesUrl } from '../constants/swAPI_urls';
 
 export const loadSpeciesByPageIdThunk = (pageId) => {
   return (dispatch) => {

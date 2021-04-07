@@ -1,4 +1,4 @@
-import AT from '../action_creators/constants'
+import AT from '../constants/action_types'
 
 const initialState = {
   allFilms: [],

@@ -1,10 +1,8 @@
 import Head from 'next/head';
 
-import AppWrapper from '../src/components/AppWrapper/AppWrapper';
-
 import { store } from '../src/store/store';
 import { Provider } from 'react-redux';
-import LoaderContainer from '../src/components/Loader/LoaderContainer';
+import { AppWrapper, Loader } from '../src/components/index';
 
 export default function Home() {
   return (
@@ -15,7 +13,7 @@ export default function Home() {
       </Head>
       <Provider store={store}>
         <AppWrapper />
-        <LoaderContainer />
+        <Loader />
       </Provider>
     </div>
   );

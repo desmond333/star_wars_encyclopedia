@@ -1,99 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './Searcher.module.scss';
 
-import { setIsSearching } from '../../../store/action_creators/peopleAC';
-import { loadPeopleBySearchValueThunk } from '../../../store/thunk_creators/loadPeopleBySearchValue';
+import { setIsSearching } from '../../../store/action_creators/people';
+import { loadPeopleBySearchValueThunk } from '../../../store/thunk_creators/index';
+import { debounce } from '../../../store/utils/debounce';
+import Sel from '../../../store/selectors/selectors';
 
 const Searcher = () => {
-  //загрузились ли вторичные данные
-  const [stateAllSecondaryData, setStateAllSecondaryData] = useState(false);
-
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
 
-  // вынести селекторы в отдельную папку
-  //planetsRr
-  const allPlanets = useSelector((state) => {
-    if (state.planets.hasMore == false) {
-      return state.planets.allPlanets;
-    }
-    return;
-  });
+  const nextPlanetsPageId = Sel.getNextPlanetsPageId(state);
+  const nextSpeciesPageId = Sel.getNextSpeciesPageId(state);
+  const nextFilmsPageId = Sel.getNextFilmsPageId(state);
 
-  //speciesRr
-  const allSpecies = useSelector((state) => {
-    if (state.species.hasMore == false) {
-      return state.species.allSpecies;
-    }
-    return;
-  });
-
-  //filmsRr
-  const allFilms = useSelector((state) => {
-    if (state.films.hasMore == false) {
-      return state.films.allFilms;
-    }
-    return;
-  });
-
+  //загрузились ли вторичные данные
+  const [isSecondaryDataUploaded, setIsSecondaryDataUploaded] = useState(false);
   useEffect(() => {
-    if (allPlanets != undefined && allSpecies != undefined && allFilms != undefined) {
-      setStateAllSecondaryData(true);
+    if (
+      nextPlanetsPageId == undefined &&
+      nextSpeciesPageId == undefined &&
+      nextFilmsPageId == undefined
+    ) {
+      setIsSecondaryDataUploaded(true);
     }
-  }, [allPlanets, allSpecies, allFilms]);
+  }, [nextPlanetsPageId, nextSpeciesPageId, nextFilmsPageId]);
+
+  //Обнуляем значение в input при перезагрузке страницы
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.value = '';
+  }, []);
 
   let onChangeInput = (e) => {
     const { value } = e.target; //деструктуризация
-    if (value != '' && stateAllSecondaryData != false) {
+    if (value != '' && isSecondaryDataUploaded != false) {
       dispatch(setIsSearching(true));
       // получать доступ к  allPlanets, allSpecies, allFilms уже внутри loadPeopleBySearchValueThunk а не передавая туда аргументы отсюда
-      dispatch(loadPeopleBySearchValueThunk(value, allPlanets, allSpecies, allFilms));
+      dispatch(loadPeopleBySearchValueThunk(value));
     } else {
       dispatch(setIsSearching(false));
     }
-    console.log(value);
   };
 
   onChangeInput = debounce(onChangeInput, 500, false);
-
-  //debounce
-  function debounce(func, wait, immediate) {
-    let timeout;
-
-    // Эта функция выполняется, когда событие DOM вызвано.
-    return function executedFunction() {
-      // Сохраняем контекст this и любые параметры,
-      // переданные в executedFunction.
-      const context = this;
-      const args = arguments;
-
-      // Функция, вызываемая по истечению времени debounce.
-      const later = function () {
-        // Нулевой timeout, чтобы указать, что debounce закончилась.
-        timeout = null;
-
-        // Вызываем функцию, если immediate !== true,
-        // то есть, мы вызываем функцию в конце, после wait времени.
-        if (!immediate) func.apply(context, args);
-      };
-
-      // Определяем, следует ли нам вызывать функцию в начале.
-      const callNow = immediate && !timeout;
-
-      // clearTimeout сбрасывает ожидание при каждом выполнении функции.
-      // Это шаг, который предотвращает выполнение функции.
-      clearTimeout(timeout);
-
-      // Перезапускаем период ожидания debounce.
-      // setTimeout возвращает истинное значение / truthy value
-      // (оно отличается в web и node)
-      timeout = setTimeout(later, wait);
-
-      // Вызываем функцию в начале, если immediate === true
-      if (callNow) func.apply(context, args);
-    };
-  }
 
   return (
     <div className={styles.search}>
@@ -103,13 +55,14 @@ const Searcher = () => {
             className={styles.form__control}
             onChange={onChangeInput}
             placeholder="Search by name"
-            data-autoresize></input>
+            data-autoresize
+            ref={inputRef}></input>
           <span className={styles.form__line}></span>
           <button className={styles.form__button} type="submit"></button>
         </div>
       </form>
     </div>
   );
-}
+};
 
 export default Searcher;

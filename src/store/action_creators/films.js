@@ -1,4 +1,4 @@
-import AT from './constants';
+import AT from '../constants/action_types';
 
 export const addFilms = (data) => ({
   type: AT.ADD_FILMS,

@@ -1,4 +1,4 @@
-import AT from './constants';
+import AT from '../constants/action_types';
 
 export const addPlanets = (data) => ({
   type: AT.ADD_PLANETS,

@@ -1,37 +1,29 @@
 import { addPropsForPeople } from '../helpers/addPropsForPeople';
-import { addSearchablePeople, setIsLoadingSearch, setIsFound } from '../action_creators/search';
+import { addPeople, setIsLoading, setNextPeoplePageId } from '../action_creators/people';
 import { peopleUrl } from '../constants/swAPI_urls';
-import Sel from '../selectors/selectors';
+import Sel from '../selectors/selectors'
 
-export const loadPeopleBySearchValueThunk = (searchValue) => {
+export const loadPeopleByPageIdThunk = () => {
   return (dispatch, getState) => {
     const state = getState();
     const allPlanets = Sel.getAllPlanets(state);
-
     const allSpecies = Sel.getAllSpecies(state);
     const allFilms = Sel.getAllFilms(state);
+    const nextPeoplePageId = Sel.getNextPageId(state);
 
-    dispatch(setIsLoadingSearch(true));
+    dispatch(setIsLoading(true));
 
-    fetch(`${peopleUrl}?search=${searchValue}`)
+    fetch(`${peopleUrl}?page=${nextPeoplePageId}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.results.length == 0) {
-          dispatch(setIsFound(false));
-          dispatch(addSearchablePeople(data.results));
-
-          dispatch(setIsLoadingSearch(false));
-
-          return;
-        }
+        const nextPageId = data?.next?.slice(34);
+        dispatch(setNextPeoplePageId(nextPageId));
 
         const people = addPropsForPeople(data.results, allPlanets, allSpecies, allFilms);
         //чтобы увеличить скорость изменения вторичных данных,
         //возращаем уже модифицированный массив с людьми
-        dispatch(addSearchablePeople(people));
-        dispatch(setIsFound(true));
-
-        dispatch(setIsLoadingSearch(false));
+        dispatch(addPeople(people));
+        dispatch(setIsLoading(false));
       });
   };
 };

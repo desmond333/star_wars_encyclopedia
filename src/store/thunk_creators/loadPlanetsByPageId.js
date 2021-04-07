@@ -1,6 +1,6 @@
-import { addPlanets, setNextPlanetsPageId } from '../action_creators/planetsAC';
+import { addPlanets, setNextPlanetsPageId } from '../action_creators/planets';
 
-import { planetsUrl } from '../action_creators/constants';
+import { planetsUrl } from '../constants/swAPI_urls';
 
 export const loadPlanetsByPageIdThunk = (pageId) => {
   return (dispatch) => {

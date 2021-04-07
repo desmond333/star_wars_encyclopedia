@@ -1,4 +1,4 @@
-import AT from './constants';
+import AT from '../constants/action_types';
 
 export const addPeople = (data) => ({
   type: AT.ADD_PEOPLE,
@@ -25,27 +25,6 @@ export const setNextPeoplePageId = (id) => ({
   type: AT.SET_NEXT_PEOPLE_PAGE_ID,
   payload: {
     pageId: id,
-  },
-});
-
-export const setHomeworld = (withVisibleHomeworldPeople) => ({
-  type: AT.SET_HOMEWORLD,
-  payload: {
-    withVisibleHomeworldPeople,
-  },
-});
-
-export const setSpecies = (withVisibleSpeciesPeople) => ({
-  type: AT.SET_SPECIES,
-  payload: {
-    withVisibleSpeciesPeople,
-  },
-});
-
-export const setFilms = (withVisibleFilmsPeople) => ({
-  type: AT.SET_FILMS,
-  payload: {
-    withVisibleFilmsPeople,
   },
 });
 

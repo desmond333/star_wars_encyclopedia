@@ -1,4 +1,4 @@
-import AT from './constants';
+import AT from '../constants/action_types';
 
 export const addSearchablePeople = (data) => ({
   type: AT.ADD_SEARCHABLE_PEOPLE,

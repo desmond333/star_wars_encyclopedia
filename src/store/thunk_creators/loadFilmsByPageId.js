@@ -1,6 +1,6 @@
-import { addFilms, setNextFilmsPageId } from '../action_creators/filmsAC';
+import { addFilms, setNextFilmsPageId } from '../action_creators/films';
 
-import { filmsUrl } from '../action_creators/constants';
+import { filmsUrl } from '../constants/swAPI_urls';
 
 export const loadFilmsByPageIdThunk = (pageId) => {
   return (dispatch) => {

@@ -5,101 +5,62 @@ import { useSelector, useDispatch } from 'react-redux';
 import styles from './Cardspace.module.scss';
 import Card from './Card/Card';
 
-import { loadPeopleByPageIdThunk } from '../../../store/thunk_creators/loadPeopleByPageIdThunk';
-import { loadPlanetsByPageIdThunk } from '../../../store/thunk_creators/loadPlanetsByPageIdThunk';
-import { setHomeworldInPeopleThunk } from '../../../store/thunk_creators/setHomeworldThunk';
-import { loadSpeciesByPageIdThunk } from '../../../store/thunk_creators/loadSpeciesByPageIdThunk';
-import { setSpeciesInPeopleThunk } from '../../../store/thunk_creators/setSpeciesThunk';
-import { loadFilmsByPageIdThunk } from '../../../store/thunk_creators/loadFilmsByPageIdThunk';
-import { setFilmsInPeopleThunk } from '../../../store/thunk_creators/setFilmsThunk';
+import Sel from '../../../store/selectors/selectors';
+import {
+  loadPeopleByPageIdThunk,
+  loadPlanetsByPageIdThunk,
+  loadSpeciesByPageIdThunk,
+  loadFilmsByPageIdThunk,
+} from '../../../store/thunk_creators/index';
 
 const Cardspace = ({ appBodyRef }) => {
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
 
   //peopleRr
-  const allPeople = useSelector((state) => state.people.allPeople);
-  const nextPeoplePageId = useSelector((state) => state.people.nextPageId);
-  const isLoading = useSelector((state) => state.people.isLoading);
-  const isSearching = useSelector((state) => state.people.isSearching);
-  const hasMore = useSelector((state) => state.people.hasMore);
+  const allPeople = Sel.getAllPeople(state);
+  const isLoading = Sel.getIsLoading(state);
+  const isSearching = Sel.getIsSearching(state);
+  const hasMore = Sel.getHasMore(state);
 
-  //planetsRr
-  const allPlanets = useSelector((state) => {
-    if (state.planets.hasMore == false) {
-      return state.planets.allPlanets;
-    }
-    return;
-  });
-  const nextPlanetsPageId = useSelector((state) => state.planets.nextPageId);
-
-  //speciesRr
-  const allSpecies = useSelector((state) => {
-    if (state.species.hasMore == false) {
-      return state.species.allSpecies;
-    }
-    return;
-  });
-  const nextSpeciesPageId = useSelector((state) => state.species.nextPageId);
-
-  //filmsRr
-  const allFilms = useSelector((state) => {
-    if (state.films.hasMore == false) {
-      return state.films.allFilms;
-    }
-    return;
-  });
-  const nextFilmsPageId = useSelector((state) => state.films.nextPageId);
+  //nextPage of secondary data
+  const nextPlanetsPageId = Sel.getNextPlanetsPageId(state);
+  const nextSpeciesPageId = Sel.getNextSpeciesPageId(state);
+  const nextFilmsPageId = Sel.getNextFilmsPageId(state);
 
   //searchRr
-  const isLoadingSearchRr = useSelector((state) => state.search.isLoadingSearchRr);
-  const isFound = useSelector((state) => state.search.isFound);
-  const allSearchablePeople = useSelector((state) => {
-    if (isLoadingSearchRr == false) {
-      return state.search.allSearchablePeople;
-    }
-    return;
-  });
-
-  //добавляем в peopleRr первую страницу людей при первом рендере
-  useEffect(() => {
-    dispatch(loadPeopleByPageIdThunk());
-  }, []);
+  const isLoadingSearchRr = Sel.getIsLoadingSearchRr(state);
+  const isFound = Sel.getIsFound(state);
+  const allSearchablePeople = Sel.getAllSearchablePeople(state);
 
   //добавляем в planetsRr все страницы планет сразу после первого рендера
   useEffect(() => {
-    //это бесконечный цикл благодаря зависимости в useEffect от pageId с 1 условием для выхода из него
     if (nextPlanetsPageId != undefined) {
       dispatch(loadPlanetsByPageIdThunk(nextPlanetsPageId));
-    }
-    //после загрузки всех планет устанавливаем homeworld первым десяти людям
-    else {
-      dispatch(setHomeworldInPeopleThunk(allPeople, allPlanets));
     }
   }, [nextPlanetsPageId]);
 
   //добавляем в speciesRr все страницы рас сразу после первого рендера
   useEffect(() => {
-    //это бесконечный цикл благодаря зависимости в useEffect от pageId с 1 условием для выхода из него
     if (nextSpeciesPageId != undefined) {
       dispatch(loadSpeciesByPageIdThunk(nextSpeciesPageId));
-    }
-    //после загрузки всех рас устанавливаем species первым десяти людям
-    else {
-      dispatch(setSpeciesInPeopleThunk(allPeople, allSpecies));
     }
   }, [nextSpeciesPageId]);
 
   //добавляем в filmsRr все страницы фильмов сразу после первого рендера
   useEffect(() => {
-    //это бесконечный цикл благодаря зависимости в useEffect от pageId с 1 условием для выхода из него
     if (nextFilmsPageId != undefined) {
       dispatch(loadFilmsByPageIdThunk(nextFilmsPageId));
     }
-    //после загрузки всех рас устанавливаем films первым десяти людям
-    else {
-      dispatch(setFilmsInPeopleThunk(allPeople, allFilms));
-    }
   }, [nextFilmsPageId]);
+
+  //добавляем в peopleRr первую страницу людей после загрузки всех вторичных данных
+  useEffect(() => {
+    nextPlanetsPageId == undefined &&
+      nextSpeciesPageId == undefined &&
+      nextFilmsPageId == undefined &&
+      dispatch(loadPeopleByPageIdThunk());
+  }, [nextPlanetsPageId, nextSpeciesPageId, nextFilmsPageId]);
 
   //с помощью этой f загружаем следующую страницу с новыми людьми
   const loadPeople = () => {

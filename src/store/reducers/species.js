@@ -1,19 +1,19 @@
-import AT from '../action_creators/constants'
+import AT from '../constants/action_types'
 
 const initialState = {
-  allPlanets: [],
+  allSpecies: [],
   nextPageId: 1,
   hasMore: true,
 };
 
-const planetsRr = (state = initialState, action) => {
+const speciesRr = (state = initialState, action) => {
   switch (action.type) {
-    case AT.ADD_PLANETS:
+    case AT.ADD_SPECIES:
       return {
         ...state,
-        allPlanets: [...state.allPlanets, ...action.payload.data],
+        allSpecies: [...state.allSpecies, ...action.payload.data],
       };
-    case AT.SET_NEXT_PLANETS_PAGE_ID:
+    case AT.SET_NEXT_SPECIES_PAGE_ID:
       return {
         ...state,
         nextPageId: action.payload.pageId,
@@ -24,4 +24,4 @@ const planetsRr = (state = initialState, action) => {
   }
 };
 
-export default planetsRr;
+export default speciesRr;

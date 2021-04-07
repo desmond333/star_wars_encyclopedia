@@ -1,9 +1,9 @@
-import AT from '../action_creators/constants';
+import AT from '../constants/action_types';
 
 const initialState = {
   allPeople: [],
   nextPageId: 1,
-  isLoading: false,
+  isLoading: true,
   isSearching: false,
   hasMore: true,
 };
@@ -33,24 +33,6 @@ const peopleRr = (state = initialState, action) => {
         ...state,
         nextPageId: action.payload.pageId,
         hasMore: !!action.payload.pageId,
-      };
-    case AT.SET_HOMEWORLD:
-      //нужен только вначале, когда людей не более 10
-      return {
-        ...state,
-        allPeople: action.payload.withVisibleHomeworldPeople,
-      };
-    case AT.SET_SPECIES:
-      //нужен только вначале, когда людей не более 10
-      return {
-        ...state,
-        allPeople: action.payload.withVisibleSpeciesPeople,
-      };
-    case AT.SET_FILMS:
-      //нужен только вначале, когда людей не более 10
-      return {
-        ...state,
-        allPeople: action.payload.withVisibleFilmsPeople,
       };
     default:
       return state;
