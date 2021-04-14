@@ -6,7 +6,7 @@ import styles from './Card.module.scss';
 import ModalArea from '../../../ModalArea/ModalArea';
 import { setIsLoading } from '../../../../store/action_creators/people';
 
-export default function Card(props) {
+const Card = (props) => {
   //с помощью хука useState создаем локальный стейт для открытия модального окна
   const [open, setOpen] = useState(false);
 
@@ -79,4 +79,6 @@ export default function Card(props) {
       />
     </div>
   );
-}
+};
+
+export default Card;

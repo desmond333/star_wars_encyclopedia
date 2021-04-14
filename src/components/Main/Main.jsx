@@ -5,7 +5,7 @@ import styles from './Main.module.scss';
 import Cardspace from './Cardspace/Cardspace';
 import Searcher from './Searcher/Searcher';
 
-export default function Main({ appBodyRef }) {
+const Main = ({ appBodyRef }) => {
   return (
     <main className={styles.main}>
       <Searcher />
@@ -13,4 +13,6 @@ export default function Main({ appBodyRef }) {
       <Cardspace appBodyRef={appBodyRef} />
     </main>
   );
-}
+};
+
+export default Main;

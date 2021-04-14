@@ -1,3 +1,5 @@
+@import './common_vars.scss';
+
 /* roboto-regular - latin */
 @font-face {
   font-family: 'Roboto';
@@ -28,6 +30,27 @@ body {
   padding: 0;
   margin: 0;
   font-family: Roboto;
+
+  /* firefox */
+  scrollbar-color: $yellow $black;
+  scrollbar-width: thin; /* толщина */
+
+  /* webkit */
+  /* полоса прокрутки (скроллбар) */
+  ::-webkit-scrollbar {
+    width: 0.5vw; /* ширина для вертикального скролла */
+    background-color: $black;
+  }
+  /* ползунок скроллбара */
+  ::-webkit-scrollbar-thumb {
+    background-color: $yellow;
+    &:hover {
+      background-color: #aac339;
+    }
+    &:active {
+      background-color: #738d42;
+    }
+  }
 }
 
 .noScroll {

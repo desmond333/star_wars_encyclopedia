@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 
 import styles from './ModalArea.module.scss';
 
-export default function ModalArea(props) {
+const ModalArea = (props) => {
   //модальное окно откроется только если isOpen будет true
   if (!props.isOpen) return null;
 
@@ -87,4 +87,6 @@ export default function ModalArea(props) {
     </div>,
     document.body,
   );
-}
+};
+
+export default ModalArea;

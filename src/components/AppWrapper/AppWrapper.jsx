@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 import { Header, Main, Footer } from '../index';
 
-export default function AppWrapper() {
+const AppWrapper = () => {
   //с помощью хука useRef создаем ссылку на контейнер всего приложения
   const appBodyRef = useRef();
 
@@ -15,4 +15,6 @@ export default function AppWrapper() {
       <Footer />
     </div>
   );
-}
+};
+
+export default AppWrapper;
