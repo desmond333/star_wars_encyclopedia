@@ -3,7 +3,8 @@ import AT from '../constants/action_types';
 const initialState = {
   allPeople: [],
   nextPageId: 1,
-  isLoading: true,
+  isLoading: false,
+  isLoaderVisible: false,
   isSearching: false,
   hasMore: true,
 };
@@ -13,15 +14,17 @@ const peopleRr = (state = initialState, action) => {
     case AT.ADD_PEOPLE:
       return {
         ...state,
-        allPeople: [
-          ...state.allPeople,
-          ...action.payload.data
-        ],
+        allPeople: [...state.allPeople, ...action.payload.data],
       };
     case AT.SET_IS_LOADING:
       return {
         ...state,
         isLoading: action.payload.isLoading,
+      };
+    case AT.SET_IS_LOADER_VISIBLE:
+      return {
+        ...state,
+        isLoaderVisible: action.payload.isLoaderVisible,
       };
     case AT.SET_IS_SEARCHING:
       return {

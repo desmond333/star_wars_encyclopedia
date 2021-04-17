@@ -10,7 +10,7 @@ export const addSearchablePeople = (data) => ({
 export const setIsLoadingSearch = (bool) => ({
   type: AT.SET_IS_LOADING_SEARCH,
   payload: {
-    isLoadingSearchRr: bool,
+    isLoadingSearch: bool,
   },
 });
 

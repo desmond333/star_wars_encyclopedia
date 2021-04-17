@@ -28,3 +28,10 @@ export const setNextPeoplePageId = (id) => ({
   },
 });
 
+export const setIsLoaderVisible = (bool) => ({
+  type: AT.SET_IS_LOADER_VISIBLE,
+  payload: {
+    isLoaderVisible: bool,
+  },
+});
+

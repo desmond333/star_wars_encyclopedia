@@ -29,7 +29,6 @@ const Cardspace = ({ appBodyRef }) => {
   const nextFilmsPageId = Sel.getNextFilmsPageId(state);
 
   //searchRr
-  const isLoadingSearchRr = Sel.getIsLoadingSearchRr(state);
   const isFound = Sel.getIsFound(state);
   const allSearchablePeople = Sel.getAllSearchablePeople(state);
 
@@ -56,9 +55,9 @@ const Cardspace = ({ appBodyRef }) => {
 
   //добавляем в peopleRr первую страницу людей после загрузки всех вторичных данных
   useEffect(() => {
-    nextPlanetsPageId == undefined &&
-      nextSpeciesPageId == undefined &&
-      nextFilmsPageId == undefined &&
+    nextPlanetsPageId === undefined &&
+      nextSpeciesPageId === undefined &&
+      nextFilmsPageId === undefined &&
       dispatch(loadPeopleByPageIdThunk());
   }, [nextPlanetsPageId, nextSpeciesPageId, nextFilmsPageId]);
 
@@ -67,8 +66,10 @@ const Cardspace = ({ appBodyRef }) => {
     if (isLoading) {
       return;
     }
-    //в этом thunk только что загруженным людям добавляется homeworld, species, films
-    dispatch(loadPeopleByPageIdThunk());
+    setTimeout(() => {
+      //в этом thunk только что загруженным людям добавляется homeworld, species, films
+      dispatch(loadPeopleByPageIdThunk());
+    }, 1300);
   };
 
   return (
@@ -90,12 +91,7 @@ const Cardspace = ({ appBodyRef }) => {
               dataLength={allPeople?.length || 0}
               next={loadPeople}
               hasMore={hasMore}
-              loader={<div className={styles.miniLoader}>Loading...</div>}
-              endMessage={
-                <p style={{ textAlign: 'center' }}>
-                  <b>Yay! You have seen it all</b>
-                </p>
-              }>
+              scrollThreshold={1}>
               {allPeople?.map((man, index) => (
                 <Card key={`${man}_${index}`} man={man} appBodyRef={appBodyRef} />
               ))}

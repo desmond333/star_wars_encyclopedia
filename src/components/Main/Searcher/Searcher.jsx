@@ -20,11 +20,7 @@ const Searcher = () => {
   //загрузились ли вторичные данные
   const [isSecondaryDataUploaded, setIsSecondaryDataUploaded] = useState(false);
   useEffect(() => {
-    if (
-      nextPlanetsPageId == undefined &&
-      nextSpeciesPageId == undefined &&
-      nextFilmsPageId == undefined
-    ) {
+    if ((nextPlanetsPageId && nextSpeciesPageId && nextFilmsPageId) === undefined) {
       setIsSecondaryDataUploaded(true);
     }
   }, [nextPlanetsPageId, nextSpeciesPageId, nextFilmsPageId]);
@@ -41,18 +37,18 @@ const Searcher = () => {
     const { value } = e.target; //деструктуризация
     if (value != '' && isSecondaryDataUploaded != false) {
       dispatch(setIsSearching(true));
-      // получать доступ к  allPlanets, allSpecies, allFilms уже внутри loadPeopleBySearchValueThunk а не передавая туда аргументы отсюда
       dispatch(loadPeopleBySearchValueThunk(value));
     } else {
       dispatch(setIsSearching(false));
     }
   };
 
+  //чтобы запрос на сервер вызывался не более одного раза в указанный период времени
   onChangeInput = debounce(onChangeInput, 500, false);
 
   return (
     <div className={styles.search}>
-      {!isLoading && (
+      {isSecondaryDataUploaded && (
         <form className={styles.form}>
           <div className={styles.form__group}>
             <input

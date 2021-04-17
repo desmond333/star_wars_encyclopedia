@@ -1,7 +1,7 @@
 import { addPropsForPeople } from '../helpers/addPropsForPeople';
 import { addPeople, setIsLoading, setNextPeoplePageId } from '../action_creators/people';
 import { peopleUrl } from '../constants/swAPI_urls';
-import Sel from '../selectors/selectors'
+import Sel from '../selectors/selectors';
 
 export const loadPeopleByPageIdThunk = () => {
   return (dispatch, getState) => {

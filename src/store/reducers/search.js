@@ -2,7 +2,7 @@ import AT from '../constants/action_types';
 
 const initialState = {
   allSearchablePeople: [],
-  isLoadingSearchRr: false,
+  isLoadingSearch: false,
   isFound: 'initial',
 };
 
@@ -15,7 +15,7 @@ const searchRr = (state = initialState, action) => {
     case AT.SET_IS_LOADING_SEARCH:
       return {
         ...state,
-        isLoadingSearchRr: action.payload.isLoadingSearchRr,
+        isLoadingSearch: action.payload.isLoadingSearch,
       };
     case AT.SET_IS_FOUND:
       return {
