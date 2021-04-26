@@ -18,4 +18,5 @@ npm install
 npm run dev
 ```
 
-![image_2021-04-26_00-55-06](https://user-images.githubusercontent.com/67102520/116010853-474d0800-a62a-11eb-8149-e58497c096d5.png)
+![star_wars-min](https://user-images.githubusercontent.com/67102520/116125351-0eff0580-a6ce-11eb-868f-91d484378015.gif)
+
